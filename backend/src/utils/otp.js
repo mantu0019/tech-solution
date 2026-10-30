@@ -8,14 +8,14 @@ export function getOtpHTML(otp) {
   const otpTiles = digits
     .map(
       (digit) => `
-        <td style="padding:0 4px;">
+        <td style="padding:0 5px;">
           <div style="
-            width:42px;
+            width:43px;
             height:52px;
-            background:#fff7ed;
-            border:1px solid #fed7aa;
-            border-radius:10px;
-            color:#111827;
+            background:#F5F1E8;
+            border:1px solid #E5DED1;
+            border-radius:8px;
+            color:#111111;
             font-size:25px;
             font-weight:700;
             font-family:'Courier New',monospace;
@@ -32,16 +32,17 @@ export function getOtpHTML(otp) {
   return `
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buyzen Email Verification</title>
+  <title>TechSolution - Email Verification</title>
 </head>
 
 <body style="
   margin:0;
   padding:0;
-  background:#f5f5f4;
+  background:#F5F3EE;
   font-family:Arial,Helvetica,sans-serif;
 ">
 
@@ -50,8 +51,9 @@ export function getOtpHTML(otp) {
     cellpadding="0"
     cellspacing="0"
     role="presentation"
-    style="background:#f5f5f4;padding:35px 12px;"
+    style="background:#F5F3EE;padding:40px 12px;"
   >
+
     <tr>
       <td align="center">
 
@@ -64,10 +66,10 @@ export function getOtpHTML(otp) {
           style="
             max-width:560px;
             width:100%;
-            background:#ffffff;
-            border-radius:18px;
+            background:#FFFFFF;
+            border-radius:12px;
             overflow:hidden;
-            box-shadow:0 8px 30px rgba(0,0,0,0.07);
+            border:1px solid #EAE7DF;
           "
         >
 
@@ -77,67 +79,74 @@ export function getOtpHTML(otp) {
               align="center"
               style="
                 background:#111111;
-                background-image:linear-gradient(135deg,#111111,#292018,#9a3412);
                 padding:35px 20px;
               "
             >
+
               <div style="
-                font-size:35px;
+                font-size:30px;
                 font-weight:800;
                 letter-spacing:-1px;
-                color:#ffffff;
+                color:#FFFFFF;
               ">
-                Buy<span style="color:#f97316;">zen</span>
+                Tech<span style="color:#C8BDAA;">Solution</span>
               </div>
 
               <p style="
-                margin:8px 0 0;
-                color:#fed7aa;
-                font-size:12px;
-                letter-spacing:2px;
+                margin:10px 0 0;
+                color:#BDB8AE;
+                font-size:10px;
+                letter-spacing:3px;
+                text-transform:uppercase;
               ">
-                SHOP SMART · LIVE BETTER
+                Technology · Innovation · Solutions
               </p>
+
             </td>
           </tr>
 
           <!-- Content -->
           <tr>
-            <td style="padding:35px 25px 15px;">
+            <td style="padding:40px 25px 20px;">
 
+              <!-- Icon -->
               <div style="
                 width:58px;
                 height:58px;
                 line-height:58px;
-                margin:0 auto 18px;
+                margin:0 auto 22px;
                 text-align:center;
-                border-radius:16px;
-                background:#fff7ed;
-                font-size:28px;
+                border-radius:12px;
+                background:#F5F1E8;
+                font-size:27px;
               ">
-                🔐
+                &#128274;
               </div>
 
+              <!-- Heading -->
               <h1 style="
                 margin:0 0 14px;
                 text-align:center;
-                color:#111827;
+                color:#111111;
                 font-size:25px;
-                font-weight:750;
+                font-weight:700;
+                letter-spacing:-0.5px;
               ">
-                Verify your email
+                Verify Your Email
               </h1>
 
+              <!-- Description -->
               <p style="
-                margin:0 auto 28px;
-                max-width:400px;
+                margin:0 auto 30px;
+                max-width:390px;
                 text-align:center;
-                color:#6b7280;
+                color:#77736B;
                 font-size:14px;
                 line-height:24px;
               ">
-                Welcome to Buyzen! Use the verification code below
-                to verify your email address and secure your account.
+                Welcome to TechSolution! We're glad to have you
+                on board. Enter the verification code below
+                to confirm your email address.
               </p>
 
               <!-- OTP -->
@@ -146,7 +155,7 @@ export function getOtpHTML(otp) {
                 cellpadding="0"
                 cellspacing="0"
                 role="presentation"
-                style="margin:0 auto 25px;"
+                style="margin:0 auto 28px;"
               >
                 <tr>
                   ${otpTiles}
@@ -159,21 +168,29 @@ export function getOtpHTML(otp) {
                 cellpadding="0"
                 cellspacing="0"
                 role="presentation"
-                style="margin:0 auto 28px;"
+                style="margin:0 auto 30px;"
               >
                 <tr>
                   <td style="
-                    background:#fff7ed;
+                    background:#F5F1E8;
+                    border:1px solid #EAE2D5;
                     border-radius:30px;
-                    padding:10px 17px;
-                    color:#c2410c;
+                    padding:10px 18px;
+                    color:#49443B;
                     font-size:12px;
-                    font-weight:700;
+                    font-weight:600;
                   ">
-                    ⏱ &nbsp; Expires in 10 minutes
+                    &#9201; &nbsp; Valid for 10 minutes
                   </td>
                 </tr>
               </table>
+
+              <!-- Divider -->
+              <div style="
+                height:1px;
+                background:#EFEDE8;
+                margin:0 0 25px;
+              "></div>
 
               <!-- Security Notice -->
               <table
@@ -182,46 +199,49 @@ export function getOtpHTML(otp) {
                 cellspacing="0"
                 role="presentation"
                 style="
-                  background:#fff7ed;
-                  border-left:4px solid #f97316;
-                  border-radius:8px;
-                  margin-bottom:23px;
+                  background:#F9F7F2;
+                  border-left:3px solid #B8AA91;
+                  border-radius:5px;
+                  margin-bottom:25px;
                 "
               >
                 <tr>
-                  <td style="padding:16px;">
+                  <td style="padding:17px;">
+
                     <p style="
-                      margin:0 0 7px;
-                      color:#c2410c;
-                      font-size:14px;
+                      margin:0 0 8px;
+                      color:#171717;
+                      font-size:13px;
                       font-weight:700;
                     ">
-                      Security Notice
+                      Security Reminder
                     </p>
 
                     <p style="
                       margin:0;
-                      color:#57534e;
+                      color:#77736B;
                       font-size:12px;
                       line-height:21px;
                     ">
-                      Never share your OTP with anyone.
-                      Buyzen will never ask you to disclose
-                      your verification code.
+                      Never share your verification code with anyone.
+                      Our team will never ask you for your OTP.
+                      Keep your account credentials secure.
                     </p>
+
                   </td>
                 </tr>
               </table>
 
+              <!-- Ignore Message -->
               <p style="
-                margin:0 0 25px;
+                margin:0 0 15px;
                 text-align:center;
-                color:#9ca3af;
+                color:#99958D;
                 font-size:12px;
                 line-height:21px;
               ">
-                If you didn't request this code, you can safely
-                ignore this email.
+                If you didn't request this verification code,
+                you can safely ignore this email.
               </p>
 
             </td>
@@ -232,55 +252,61 @@ export function getOtpHTML(otp) {
             <td
               align="center"
               style="
-                background:#fafaf9;
-                border-top:1px solid #f0f0f0;
-                padding:24px 15px;
+                background:#F9F8F5;
+                border-top:1px solid #EAE7DF;
+                padding:27px 15px;
               "
             >
+
               <p style="
-                margin:0 0 5px;
-                color:#6b7280;
+                margin:0 0 8px;
+                color:#77736B;
                 font-size:12px;
               ">
-                Happy Shopping!
+                Building better digital experiences.
               </p>
 
               <p style="
                 margin:0;
-                color:#111827;
+                color:#111111;
                 font-size:19px;
                 font-weight:800;
+                letter-spacing:-0.5px;
               ">
-                Buy<span style="color:#f97316;">zen</span>
+                Tech<span style="color:#A99B84;">Solution</span>
               </p>
 
               <p style="
-                margin:15px 0 0;
-                color:#9ca3af;
+                margin:16px 0 0;
+                color:#A5A198;
                 font-size:11px;
                 line-height:19px;
               ">
                 This is an automated email. Please do not reply.
                 <br>
-                &copy; ${new Date().getFullYear()} Buyzen.
+                &copy; ${new Date().getFullYear()} TechSolution.
                 All rights reserved.
               </p>
+
             </td>
           </tr>
 
         </table>
 
+        <!-- Bottom Text -->
         <p style="
-          margin:18px 0 0;
-          color:#a8a29e;
+          margin:20px 0 0;
+          color:#A5A198;
           font-size:11px;
           text-align:center;
+          letter-spacing:0.3px;
         ">
-          Secure shopping starts with Buyzen.
+          Secure. Simple. Reliable.
         </p>
 
       </td>
     </tr>
+
   </table>
 
 </body>
