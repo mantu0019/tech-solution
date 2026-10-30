@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { forgetPasswordUser, getMeUser, loginUser, logOutUser, registerUser, resendOtpUser, verifyEmailUser, verifyResetPasswordUser } from "./authAction";
+import { forgetPasswordUser, getMeUser, loginUser, logOutUser, registerUser, resendOtpUser, resetPasswordUser, verifyEmailUser, verifyResetPasswordUser } from "./authAction";
   
 const authSlice = createSlice({
     name:"auth",
@@ -124,9 +124,20 @@ const authSlice = createSlice({
           }).addCase(verifyResetPasswordUser.rejected,(state,action)=>{
             state.isLoading = false,
             state.error = action?.payload || "Error"
-          });
-
-          
+          })
+         // resetPassword 
+         .addCase(resetPasswordUser.pending,(state)=>{
+         state.isLoading = true;
+         state.error = null; 
+   
+         })
+         .addCase(resetPasswordUser.fulfilled,(state)=>{
+          state.isLoading= false;
+          state.error = null;
+         }).addCase(resetPasswordUser.rejected,(state,action)=>{
+           state.isLoading = false;
+           state.error = action?.payload || "Error"
+         })
  
 
     }

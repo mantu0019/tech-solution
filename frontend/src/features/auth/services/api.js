@@ -55,7 +55,7 @@ export const forgetPassword  = async ({email})=>{
 export const verifyResetPassword = async({email,otp})=>{
 
    const res = await apiInstance.post("/api/auth/verify-reset-otp",{
-      email,password
+      email,otp
    });
    return res.data;
  

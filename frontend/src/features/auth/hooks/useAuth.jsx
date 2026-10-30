@@ -1,6 +1,7 @@
 import  { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { forgetPasswordUser, getMeUser, loginUser, logOutUser, registerUser, resendOtpUser, verifyEmailUser, verifyResetPasswordUser } from "../state/authAction";
+import { forgetPasswordUser, getMeUser, loginUser, logOutUser, registerUser, resendOtpUser, resetPasswordUser, verifyEmailUser, verifyResetPasswordUser } from "../state/authAction";
+import { ReducerType } from "@reduxjs/toolkit";
 
 export const useAuth = () => {
   const { authData, isLoading, isLoggingIn, error,isRegistering,isVerifyingEmail,isResendOtp} = useSelector((state) => state.auth);
@@ -43,8 +44,12 @@ export const useAuth = () => {
  
   });
 
+  const resetPasswordByUser = useCallback((data)=>{
+    return dispatch(resetPasswordUser(data)).unwrap();
+  })
 
-  return {authData,isLoading,isRegistering, isVerifyingEmail,isLoggingIn,isResendOtp , error,registerByUser,verifyEmailByUser,loginByUser,getMeByUser,logOutByUser,resendOtpByUser,forgetPasswordByUser,verifyResetPasswordByUser}
+
+  return {authData,isLoading,isRegistering, isVerifyingEmail,isLoggingIn,isResendOtp , error,registerByUser,verifyEmailByUser,loginByUser,getMeByUser,logOutByUser,resendOtpByUser,forgetPasswordByUser,verifyResetPasswordByUser,resetPasswordByUser};
 };
 
 export default useAuth;

@@ -95,30 +95,32 @@ export const verifyResetOtpValidator = [
 ];
  
 export const resetPasswordValidator = [
-    body("resetToken")
-        .trim()
-        .notEmpty()
-        .withMessage("Reset token is required"),
+  body("resetToken")
+    .trim()
+    .notEmpty()
+    .withMessage("Reset token is required"),
 
-    body("newPassword")
-        .notEmpty()
-        .withMessage("New password is required")
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
-        .withMessage(
-            "Password must be at least 8 characters and include uppercase, lowercase, number, and special character"
-        ),
+  body("newPassword")
+    .notEmpty()
+    .withMessage("New password is required")
+    .isLength({ min: 8, max: 64 })
+    .withMessage("Password must be between 8 and 64 characters")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/)
+    .withMessage(
+      "Password must include uppercase, lowercase, number and special character"
+    ),
 
-    body("confirmPassword")
-        .notEmpty()
-        .withMessage("Confirm password is required")
-        .custom((value, { req }) => {
-            if (value !== req.body.newPassword) {
-                throw new Error("Passwords do not match");
-            }
-            return true;
-        }),
+  body("confirmPassword")
+    .notEmpty()
+    .withMessage("Confirm password is required")
+    .custom((value, { req }) => {
+      if (value !== req.body.newPassword) {
+        throw new Error("Passwords do not match");
+      }
+
+      return true;
+    }),
 ];
- 
 
 
 

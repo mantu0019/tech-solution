@@ -36,20 +36,22 @@ const ForgetPassword = () => {
 
   // Submit Email
   const onSubmit = async (data) => {
-    try {
-      setSuccessMessage("");
+  try {
+    setSuccessMessage("");
 
-      await forgetPasswordByUser(data);
-    navigate("/verify-reset-otp")
+    await forgetPasswordByUser(data);
 
-      setSuccessMessage(
-        "If your email is registered, a password reset OTP has been sent."
-      );
-    } catch (err) {
-      console.error("Forgot password failed:", err);
-    }
-  };
+    navigate("/verify-reset-otp", {
+      replace: true,
+      state: {
+        email: data.email,
+      },
+    });
 
+  } catch (err) {
+    console.error("Forgot password failed:", err);
+  }
+};
 
   if(isLoading){
     return <Loading/>

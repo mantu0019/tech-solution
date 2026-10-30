@@ -104,7 +104,7 @@ const VerifyResetOtp = () => {
           {error && (
             <p
               role="alert"
-              className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
+              className="mt-4 rounded-lg border capitalize border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
             >
               {typeof error === "string"
                 ? error
@@ -133,7 +133,7 @@ const VerifyResetOtp = () => {
               type="email"
               placeholder="you@example.com"
               autoComplete="email"
-              readOnly
+              
               aria-invalid={!!errors.email}
               {...register("email", {
                 required: "Email address is required",
@@ -217,7 +217,7 @@ const VerifyResetOtp = () => {
         <div className="mt-7 text-center">
 
           <Link
-            to="/login"
+            to="/"
             className="text-sm font-semibold text-[#1c1c1c] underline-offset-4 transition hover:underline"
           >
             ← Back to login
