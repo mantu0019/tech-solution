@@ -1,59 +1,64 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMeUser, loginUser, logOutUser, registerUser, verifyEmailUser } from "./authAction";
+import { forgetPasswordUser, getMeUser, loginUser, logOutUser, registerUser, resendOtpUser, verifyEmailUser, verifyResetPasswordUser } from "./authAction";
   
 const authSlice = createSlice({
     name:"auth",
     initialState:{
         authData:null,
-        isLoading:false,
-        error:null
+        isLoading:true,
+        error:null,
+        isRegistering: false,
+        isVerifyingEmail: false,
+        isLoggingIn: false,
+        isResendOtp:false
+ 
+
     },
     extraReducers:(builder)=>{
            return builder.
             //registerUser
            addCase(registerUser.pending,(state,action)=>{
 
-           state.isLoading = true;
+           state.isRegistering = true;
            state.error = null;
 
            }).addCase(registerUser.fulfilled,(state,action)=>{
 
-             state.isLoading = false;
-             state.authData = action?.payload;
-             state.error  = null;
+             state.isRegistering = false;
+              state.error  = null;
            }).addCase(registerUser.rejected,(state,action)=>{
-               state.isLoading = false;
+               state.isRegistering = false;
                state.error = action?.payload || "Error in Register";
 
            })
             // verifyEmailUser
            
            .addCase(verifyEmailUser.pending,(state,action)=>{
-           state.isLoading = true;
+           state.isVerifyingEmail = true;
            state.error = null;
  
 
            }).addCase(verifyEmailUser.fulfilled,(state,action)=>{
-          state.isLoading = false;
+          state.isVerifyingEmail = false;
           state.authData = action?.payload;
            state.error = null; 
              
             }).addCase(verifyEmailUser.rejected,(state,action)=>{
-            state.isLoading = false;
+            state.isVerifyingEmail = false;
             state.error = action?.payload || "something went wrong"
            })
            //login
            .addCase(loginUser.pending,(state)=>{
-               state.isLoading = true;
+               state.isLoggingIn = true;
                state.error = null;
            })
           .addCase(loginUser.fulfilled,(state,action)=>{
-            state.isLoading = false;
+            state.isLoggingIn = false;
             state.authData = action?.payload ;
             state.error = null 
  
             }).addCase(loginUser.rejected,(state,action)=>{
-              state.isLoading = false;
+              state.isLoggingIn = false;
               state.error = action?.payload || "Invalid email or password";
      
           })
@@ -78,6 +83,50 @@ const authSlice = createSlice({
               state.isLoading  = false;
               state.error = null;
           })
+          //resend otp
+          .addCase(resendOtpUser.pending,(state,action)=>{
+             state.isResendOtp = true;
+             state.error = null;
+ 
+
+          }).addCase(resendOtpUser.fulfilled,(state,action)=>{
+            state.isResendOtp = false;
+             state.error = null
+
+          }).addCase(resendOtpUser.rejected,(state,action)=>{
+            state.isResendOtp = false;
+            state.error = action?.payload || "Error in resend OTP"
+          })
+          // forget password
+
+          .addCase(forgetPasswordUser.pending,(state)=>{
+            state.isLoading = true;
+            state.error = null;
+          }).addCase(forgetPasswordUser.fulfilled,(state)=>{
+            state.isLoading = false;
+            state.error = null;
+          }).addCase(forgetPasswordUser.rejected,(state,action)=>{
+            state.isLoading = false;
+            state.error = action?.payload;
+          })
+
+          // verifyResetPassword
+
+          .addCase(verifyResetPasswordUser.pending,(state)=>{
+            state.isLoading   = true;
+            state.error = null;
+ 
+          })
+          .addCase(verifyResetPasswordUser.fulfilled,(state)=>{
+            state.isLoading = false;
+            state.error = null;
+
+          }).addCase(verifyResetPasswordUser.rejected,(state,action)=>{
+            state.isLoading = false,
+            state.error = action?.payload || "Error"
+          });
+
+          
  
 
     }

@@ -5,7 +5,7 @@ import { Navigate, Outlet } from 'react-router';
 
 const PrivateRoutes = () => {
   const {authData,isLoading}  = useAuth();
-
+   
  if(isLoading){
     return <Loading/>
  }

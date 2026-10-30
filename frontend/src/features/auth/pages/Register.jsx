@@ -48,7 +48,7 @@ const getStrength = (v) => {
 const Register = () => {
   const [showPw, setShowPw] = useState(false);
   const [showCpw, setShowCpw] = useState(false);
-  const { isLoading, error, registerByUser } = useAuth();
+  const { isRegistering, error, registerByUser } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -61,15 +61,19 @@ const Register = () => {
   const strength = getStrength(password);
 
   const onSubmit = async (data) => {
- try {
-    const { confirmPassword, ...registerData } = data;
-      console.log( "hello",registerData)
-    await registerByUser(registerData);
+    try {
+      const { confirmPassword, ...registerData } = data;
+      await registerByUser(registerData);
+      console.log("register data", registerData.email);
 
-    navigate("/verify-email");
-  } catch (error) {
-    console.error("Registration failed:", error);
-  }
+      navigate("/verify-email", {
+        state: {
+          email:registerData?.email,
+        },
+      });
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   const inputClass = (hasError) =>
@@ -89,7 +93,7 @@ const Register = () => {
         ? "bg-[#a1a19a]"
         : "bg-[#1c1c1c]";
 
-  if (isLoading) {
+  if (isRegistering) {
     return <Loading />;
   }
 
@@ -104,17 +108,14 @@ const Register = () => {
             Start your journey with us.
           </p>
 
-{error && (
-
-  <p
-    role="alert"
-    className="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
-  >
-    {typeof error === "string" ? error : error.message}
-  </p>
-)}
-
-
+          {error && (
+            <p
+              role="alert"
+              className="mb-4 rounded-lg border capitalize border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
+            >
+              {typeof error === "string" ? error : error.message}
+            </p>
+          )}
         </header>
 
         <form

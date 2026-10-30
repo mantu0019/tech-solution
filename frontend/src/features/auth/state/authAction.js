@@ -1,5 +1,5 @@
 import { setAccessToken } from "../../../app/api";
-import { getMe, login, logOut, register, verifyEmail } from "../services/api";
+import { forgetPassword, getMe, login, logOut, register, resendOtp, resetPassword, verifyEmail, verifyResetPassword } from "../services/api";
 import createAppAsyncThunk from "./createAsyncThunk";
 
 export const registerUser = createAppAsyncThunk("auth/register", register);
@@ -30,3 +30,8 @@ export const loginUser = createAppAsyncThunk(
 export const getMeUser = createAppAsyncThunk("auth/get-me", getMe);
 
 export const logOutUser = createAppAsyncThunk("auth/log-out",logOut);
+export const resendOtpUser = createAppAsyncThunk("auth/resend-otp",resendOtp)
+export const forgetPasswordUser = createAppAsyncThunk("auth/forget-password",forgetPassword)
+export const verifyResetPasswordUser = createAppAsyncThunk("/auth/verify-reset-otp",verifyResetPassword); 
+export const resetPasswordUser = createAppAsyncThunk("/auth/reset-password",resetPassword);
+

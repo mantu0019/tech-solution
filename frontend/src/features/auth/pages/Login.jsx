@@ -36,7 +36,7 @@ const Eye = ({ open }) => (
 const Login = () => {
   const [showPw, setShowPw] = useState(false);
 
-   const {isLoading,error,loginByUser} = useAuth()
+   const {isLoggingIn,error,loginByUser} = useAuth()
   const navigate = useNavigate();
 
   const {
@@ -71,7 +71,7 @@ const Login = () => {
   const eyeButton =
     "absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-[#a1a19a] transition hover:text-[#1c1c1c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1c1c1c]/30";
 
-  if (isLoading) {
+  if (isLoggingIn) {
     return <Loading />;
   }
 

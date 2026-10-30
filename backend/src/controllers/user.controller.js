@@ -90,20 +90,19 @@ export const verifyEmail = asyncHandler(async (req, res) => {
   const otpDoc = await otpModel.findOne({
     user: user._id,
     otpHashed: otpHashed,
+    purpose:"email-verification"
   });
-
+ 
   if (!otpDoc) {
-    throw new AppError("invalid OTP", 401);
+    throw new AppError("invalid OTP or OTP expire", 401);
   }
 
-  if (otpDoc.expiredAt < new Date()) {
+  if (otpDoc.expiredAt <=new Date()) {
     await otpModel.deleteOne({
       _id: otpDoc._id,
     });
-    return res.status(400).json({
-      success: false,
-      message: " OTP expired",
-    });
+      throw new AppError("OTP expired. Please request a new OTP.", 400);
+
   }
 
   user.isVerified = true;
@@ -111,6 +110,7 @@ export const verifyEmail = asyncHandler(async (req, res) => {
 
   await otpModel.deleteMany({
     user: user._id,
+    purpose:"email-verification"
   });
 
   const accessToken = await generateToken(user, res, req);
@@ -295,6 +295,7 @@ export const logOutController = asyncHandler(async (req, res) => {
 
 export const resendOtpController = asyncHandler(async (req, res) => {
   const { email } = req.body;
+  console.log("🚀 ~ email:", email)
 
   if (!email) {
     throw new AppError("Input field are required", 401);
@@ -383,7 +384,7 @@ export const verifyResetOtpController = asyncHandler(async (req, res) => {
     throw new AppError("all Input field are required", 400);
   }
 
-  const user = await userModel.findOne({ email });
+  const user = await userModel.findOne({ email:email.trim().toLowerCase()});
 
   if (!user) {
     throw new AppError("invalid or OTP expired", 401);
@@ -403,14 +404,12 @@ export const verifyResetOtpController = asyncHandler(async (req, res) => {
   }
 
   if (otpDoc.expiredAt < new Date()) {
-    await otpModel.deleteOne({ _id: otpDoc._id });
+   
 
     throw new AppError("OTP expired", 401);
   }
 
-  await otpModel.deleteOne({
-    _id: otpDoc._id,
-  });
+ 
 
   const accessToken = jwt.sign(
     {
@@ -479,7 +478,7 @@ export const resetPasswordController =  asyncHandler(async(req,res)=>{
 
 
     res.status(200).json({
-      success:false,
+      success:true,
       message:"Password reset successful. Please log in again"
     })
 

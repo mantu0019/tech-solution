@@ -4,8 +4,7 @@ import Loading from "./Loading";
 
 const PublicRoutes = () => {
   const { authData, isLoading } = useAuth();
-
-  if (isLoading) {
+   if (isLoading) {
     return <Loading />;
   }
    return authData ? <Navigate to="/home" replace /> : <Outlet />;

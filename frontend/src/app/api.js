@@ -27,17 +27,17 @@ apiInstance.interceptors.response.use(
 
   async (error) => {
     const originalRequest = error.config;
-
-   if (
+if (
   error.response?.status !== 401 ||
   !originalRequest ||
   originalRequest._retry ||
   originalRequest.url?.includes("/api/auth/refreshToken") ||
-  originalRequest.url?.includes("/api/auth/login")
+  originalRequest.url?.includes("/api/auth/login") ||
+  originalRequest.url?.includes("/api/auth/register") ||
+  originalRequest.url?.includes("/api/auth/verify-email")
 ) {
   return Promise.reject(error);
 }
-
     originalRequest._retry = true;
 
     try {

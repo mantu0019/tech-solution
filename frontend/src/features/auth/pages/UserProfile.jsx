@@ -39,7 +39,7 @@ Profile unavailable </h1>
       </p>
 
       <button
-        onClick={() => navigate("/login", { replace: true })}
+        onClick={() => navigate("/", { replace: true })}
         className="mt-6 w-full rounded-xl bg-[#1c1c1c] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#333331]"
       >
         Go to Login

@@ -23,7 +23,7 @@ import UserProfile from "../features/auth/pages/UserProfile";
       { path: "verify-email", element: <VerifyEmail /> },
       { path: "resend-otp", element: <ResendOtp /> },
       {
-        path: "forget-password",
+        path: "forgot-password",
         element: <ForgetPassword />,
       },
 
