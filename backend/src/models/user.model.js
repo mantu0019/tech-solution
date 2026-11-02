@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import { type } from "os";
-
+ 
 const userSchema = new mongoose.Schema(
   {
     fullName: {
@@ -40,11 +39,15 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-   walletBalance:{
-    type:Number,
-    default:0,
-    min:0
-   }
+  walletBalance: {
+  type: Number,
+  default: 0,
+  min: 0,
+  validate: {
+    validator: Number.isInteger,
+    message: "Wallet balance must be an integer"
+  }
+}
 
  
   },

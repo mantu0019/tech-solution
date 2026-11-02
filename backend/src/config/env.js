@@ -6,7 +6,7 @@ if (!process.env.MONGO_URI) {
 }
 
 if (!process.env.PORT) {
-  throw new Error("MONGO_URI is missing from .env");
+  throw new Error("PORT is missing from .env");
 }
 
 if (!process.env.ACCESS_TOKEN) {
@@ -35,11 +35,14 @@ if (!process.env.GOOGLE_USER) {
 if (!process.env.OTP_EXPIRE_MINUTES) {
   throw new Error("OTP_EXPIRE_MINUTES is missing from .env");
 }
-if (!process.env.RAZORPAY_API_KEY) {
-  throw new Error("RAZORPAY_API_KEY is missing from .env");
+if (!process.env.RAZORPAY_KEY_ID) {
+  throw new Error("RAZORPAY_KEY_ID is missing from .env");
 }
 if (!process.env.RAZORPAY_KEY_SECRET) {
   throw new Error("RAZORPAY_KEY_SECRET is missing from .env");
+}
+if (!process.env.RAZORPAY_WEBHOOK_SECRET) {
+  throw new Error("RAZORPAY_WEBHOOK_SECRET is missing from .env");
 }
 
 const envConfig = {
@@ -53,8 +56,9 @@ const envConfig = {
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_USER: process.env.GOOGLE_USER,
   OTP_EXPIRE_MINUTES:process.env.OTP_EXPIRE_MINUTES,
-  RAZORPAY_API_KEY:process.env.RAZORPAY_API_KEY,
-  RAZORPAY_KEY_SECRET:process.env.RAZORPAY_KEY_SECRET
+  RAZORPAY_KEY_ID:process.env.RAZORPAY_KEY_ID,
+  RAZORPAY_KEY_SECRET:process.env.RAZORPAY_KEY_SECRET,
+  RAZORPAY_WEBHOOK_SECRET:process.env.RAZORPAY_WEBHOOK_SECRET
 
 };
 
