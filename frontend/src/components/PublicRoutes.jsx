@@ -7,7 +7,7 @@ const PublicRoutes = () => {
    if (isLoading) {
     return <Loading />;
   }
-   return authData ? <Navigate to="/home" replace /> : <Outlet />;
+   return authData ? <Navigate to="/dashboard" replace /> : <Outlet />;
 
  };
 
