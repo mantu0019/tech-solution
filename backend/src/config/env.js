@@ -35,6 +35,12 @@ if (!process.env.GOOGLE_USER) {
 if (!process.env.OTP_EXPIRE_MINUTES) {
   throw new Error("OTP_EXPIRE_MINUTES is missing from .env");
 }
+if (!process.env.RAZORPAY_API_KEY) {
+  throw new Error("RAZORPAY_API_KEY is missing from .env");
+}
+if (!process.env.RAZORPAY_KEY_SECRET) {
+  throw new Error("RAZORPAY_KEY_SECRET is missing from .env");
+}
 
 const envConfig = {
   MONGO_URI: process.env.MONGO_URI,
@@ -46,7 +52,10 @@ const envConfig = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_USER: process.env.GOOGLE_USER,
-  OTP_EXPIRE_MINUTES:process.env.OTP_EXPIRE_MINUTES
+  OTP_EXPIRE_MINUTES:process.env.OTP_EXPIRE_MINUTES,
+  RAZORPAY_API_KEY:process.env.RAZORPAY_API_KEY,
+  RAZORPAY_KEY_SECRET:process.env.RAZORPAY_KEY_SECRET
+
 };
 
 export default envConfig;
