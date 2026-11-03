@@ -51,7 +51,7 @@ const Login = () => {
     try {
      console.log("data",data)
      await loginByUser(data)
-      navigate("/home");
+      navigate("/dashboard");
     } catch (error) {
       console.error("Login failed:", error);
     }

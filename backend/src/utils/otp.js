@@ -32,11 +32,10 @@ export function getOtpHTML(otp) {
   return `
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechSolution - Email Verification</title>
+  <title>Riya Cyber Cafe - Email Verification</title>
 </head>
 
 <body style="
@@ -46,23 +45,13 @@ export function getOtpHTML(otp) {
   font-family:Arial,Helvetica,sans-serif;
 ">
 
-  <table
-    width="100%"
-    cellpadding="0"
-    cellspacing="0"
-    role="presentation"
-    style="background:#F5F3EE;padding:40px 12px;"
-  >
-
+  <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
+    style="background:#F5F3EE;padding:40px 12px;">
     <tr>
       <td align="center">
 
         <!-- Main Card -->
-        <table
-          width="560"
-          cellpadding="0"
-          cellspacing="0"
-          role="presentation"
+        <table width="560" cellpadding="0" cellspacing="0" role="presentation"
           style="
             max-width:560px;
             width:100%;
@@ -70,26 +59,21 @@ export function getOtpHTML(otp) {
             border-radius:12px;
             overflow:hidden;
             border:1px solid #EAE7DF;
-          "
-        >
+          ">
 
           <!-- Header -->
           <tr>
-            <td
-              align="center"
-              style="
-                background:#111111;
-                padding:35px 20px;
-              "
-            >
-
+            <td align="center" style="
+              background:#111111;
+              padding:35px 20px;
+            ">
               <div style="
                 font-size:30px;
                 font-weight:800;
                 letter-spacing:-1px;
                 color:#FFFFFF;
               ">
-                Tech<span style="color:#C8BDAA;">Solution</span>
+                Riya<span style="color:#C8BDAA;"> Cyber Cafe</span>
               </div>
 
               <p style="
@@ -99,9 +83,8 @@ export function getOtpHTML(otp) {
                 letter-spacing:3px;
                 text-transform:uppercase;
               ">
-                Technology · Innovation · Solutions
+                Digital Services · Technology · Solutions
               </p>
-
             </td>
           </tr>
 
@@ -144,32 +127,22 @@ export function getOtpHTML(otp) {
                 font-size:14px;
                 line-height:24px;
               ">
-                Welcome to TechSolution! We're glad to have you
+                Welcome to Riya Cyber Cafe! We're glad to have you
                 on board. Enter the verification code below
                 to confirm your email address.
               </p>
 
               <!-- OTP -->
-              <table
-                align="center"
-                cellpadding="0"
-                cellspacing="0"
-                role="presentation"
-                style="margin:0 auto 28px;"
-              >
+              <table align="center" cellpadding="0" cellspacing="0"
+                role="presentation" style="margin:0 auto 28px;">
                 <tr>
                   ${otpTiles}
                 </tr>
               </table>
 
               <!-- Expiry -->
-              <table
-                align="center"
-                cellpadding="0"
-                cellspacing="0"
-                role="presentation"
-                style="margin:0 auto 30px;"
-              >
+              <table align="center" cellpadding="0" cellspacing="0"
+                role="presentation" style="margin:0 auto 30px;">
                 <tr>
                   <td style="
                     background:#F5F1E8;
@@ -193,21 +166,15 @@ export function getOtpHTML(otp) {
               "></div>
 
               <!-- Security Notice -->
-              <table
-                width="100%"
-                cellpadding="0"
-                cellspacing="0"
-                role="presentation"
-                style="
+              <table width="100%" cellpadding="0" cellspacing="0"
+                role="presentation" style="
                   background:#F9F7F2;
                   border-left:3px solid #B8AA91;
                   border-radius:5px;
                   margin-bottom:25px;
-                "
-              >
+                ">
                 <tr>
                   <td style="padding:17px;">
-
                     <p style="
                       margin:0 0 8px;
                       color:#171717;
@@ -227,7 +194,6 @@ export function getOtpHTML(otp) {
                       Our team will never ask you for your OTP.
                       Keep your account credentials secure.
                     </p>
-
                   </td>
                 </tr>
               </table>
@@ -249,15 +215,11 @@ export function getOtpHTML(otp) {
 
           <!-- Footer -->
           <tr>
-            <td
-              align="center"
-              style="
-                background:#F9F8F5;
-                border-top:1px solid #EAE7DF;
-                padding:27px 15px;
-              "
-            >
-
+            <td align="center" style="
+              background:#F9F8F5;
+              border-top:1px solid #EAE7DF;
+              padding:27px 15px;
+            ">
               <p style="
                 margin:0 0 8px;
                 color:#77736B;
@@ -273,7 +235,7 @@ export function getOtpHTML(otp) {
                 font-weight:800;
                 letter-spacing:-0.5px;
               ">
-                Tech<span style="color:#A99B84;">Solution</span>
+                Riya<span style="color:#A99B84;"> Cyber Cafe</span>
               </p>
 
               <p style="
@@ -284,10 +246,9 @@ export function getOtpHTML(otp) {
               ">
                 This is an automated email. Please do not reply.
                 <br>
-                &copy; ${new Date().getFullYear()} TechSolution.
+                &copy; ${new Date().getFullYear()} Riya Cyber Cafe.
                 All rights reserved.
               </p>
-
             </td>
           </tr>
 
@@ -306,7 +267,6 @@ export function getOtpHTML(otp) {
 
       </td>
     </tr>
-
   </table>
 
 </body>

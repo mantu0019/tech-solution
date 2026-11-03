@@ -82,7 +82,7 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <UserProfile />,
+        element: <UserProfile/>,
       },
     ],
   },

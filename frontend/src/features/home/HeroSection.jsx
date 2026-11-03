@@ -1,16 +1,12 @@
- 
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-[calc(100vh-90px)] overflow-hidden flex items-center bg-transparent">
-
       {/* Main Container */}
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 py-20 w-full">
-
         <div className="max-w-4xl mx-auto text-center">
-
           {/* Top Badge */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -32,11 +28,9 @@ const HeroSection = () => {
             transition={{ duration: 0.9, delay: 0.2 }}
             className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight tracking-tight"
           >
-            Explore The Future
-            <br />
-
+            Riya Cyber Cafe<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#55b9b5] to-[#258b91]">
-              Of Technology.
+               हर Digital सेवा उपलब्ध!
             </span>
           </motion.h1>
 
@@ -47,10 +41,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="max-w-2xl mx-auto mt-7 text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed"
           >
-            Your Daily Dose of Technology Insights.
-            Discover the latest tech trends, AI innovations,
-            gadgets, programming and everything shaping
-            our digital world.
+            Aapki har digital zaroorat ka ek hi solution. Online Forms,
+            Government Services, Aadhaar, PAN Card aur kai tarah ki digital
+            services ka labh uthayein, wo bhi aasani aur bharose ke saath.
           </motion.p>
 
           {/* Buttons */}
@@ -60,7 +53,6 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-5 mt-10"
           >
-
             {/* Login Button */}
             <Link
               to="/login"
@@ -68,7 +60,6 @@ const HeroSection = () => {
             >
               <span className="relative z-10 flex items-center justify-center gap-3">
                 Get Started
-
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
                   →
                 </span>
@@ -80,9 +71,8 @@ const HeroSection = () => {
               to="/services"
               className="px-9 py-4 w-full sm:w-auto rounded-full bg-white text-gray-800 font-semibold border border-gray-200 hover:border-[#55b9b5] hover:text-[#369fa3] hover:-translate-y-1 transition-all duration-300 shadow-sm text-center"
             >
-              Explore Technology
+              Explore Services
             </Link>
-
           </motion.div>
 
           {/* Technology Tags */}
@@ -92,13 +82,12 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="flex flex-wrap items-center justify-center gap-3 mt-16"
           >
-
             {[
-              "Artificial Intelligence",
-              "Web Development",
-              "Gadgets",
-              "Tech News",
-              "Innovation",
+              "Aadhaar & PAN Card",
+              "Sarkari Praman Patra",
+              "Online Form Services",
+              "Digital Banking",
+              "Education & Career",
             ].map((item) => (
               <motion.span
                 key={item}
@@ -108,19 +97,9 @@ const HeroSection = () => {
                 {item}
               </motion.span>
             ))}
-
           </motion.div>
 
-          {/* Bottom Text */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            className="mt-16 text-sm text-gray-400"
-          >
-            Discover · Learn · Innovate · Grow
-          </motion.div>
-
+          
         </div>
       </div>
     </section>
@@ -128,4 +107,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
- 

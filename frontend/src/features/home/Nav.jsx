@@ -40,9 +40,9 @@ const Nav = () => {
             <Link
               to="/"
               onClick={closeMenu}
-              className="text-2xl font-extrabold tracking-tight text-gray-900 whitespace-nowrap"
+              className="text-2xl  font-extrabold tracking-tight text-gray-900 whitespace-nowrap"
             >
-              Tech<span className="text-[#55b9b5]">Solution.</span>
+              Riya<span className="text-[#55b9b5]">Cyber Cafe</span>
             </Link>
 
             {/* Mobile Menu Button */}

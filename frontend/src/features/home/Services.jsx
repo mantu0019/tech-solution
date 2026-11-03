@@ -1,73 +1,392 @@
+// import { motion } from "framer-motion";
+
+// import {
+//   Printer,
+//   Vote,
+//   CreditCard,
+//   Smartphone,
+//   FileText,
+//   House,
+//   ClipboardList,
+//   Sprout,
+//   HardHat,
+//   IdCard,
+//   Laptop,
+//   GraduationCap,
+//   HeartPulse,
+//   Link,
+//   Zap,
+//   BadgeCheck,
+//   Tractor,
+//   FileCheck,
+//   Wallet,
+//   ReceiptText,
+// } from "lucide-react";
+
  
+// const services = [
+//   {
+//     title: "Aadhaar Card Print",
+//     description: "आधार कार्ड प्रिंट एवं संबंधित सेवाएं।",
+//     icon: Printer,
+//     color: "from-orange-500 to-orange-600",
+//   },
+//   {
+//     title: "Voter Card Apply",
+//     description: "नया वोटर कार्ड बनवाएं एवं सुधार करवाएं।",
+//     icon: Vote,
+//     color: "from-green-500 to-green-600",
+//   },
+//   {
+//     title: "PAN Card Apply",
+//     description: "नया पैन कार्ड बनवाएं एवं सुधार करवाएं।",
+//     icon: CreditCard,
+//     color: "from-blue-500 to-blue-600",
+//   },
+//   {
+//     title: "Mobile Recharge",
+//     description: "प्रीपेड एवं पोस्टपेड मोबाइल रिचार्ज करें।",
+//     icon: Smartphone,
+//     color: "from-purple-500 to-purple-600",
+//   },
+//   {
+//     title: "Caste Certificate",
+//     description: "जाति प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+//     icon: FileText,
+//     color: "from-indigo-500 to-indigo-600",
+//   },
+//   {
+//     title: "Income Certificate",
+//     description: "आय प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+//     icon: ReceiptText,
+//     color: "from-pink-500 to-pink-600",
+//   },
+//   {
+//     title: "Residence Certificate",
+//     description: "निवास प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+//     icon: House,
+//     color: "from-orange-500 to-amber-600",
+//   },
+//   {
+//     title: "Character Certificate",
+//     description: "आचरण प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+//     icon: FileCheck,
+//     color: "from-red-500 to-red-600",
+//   },
+//   {
+//     title: "PF Withdrawal",
+//     description: "पीएफ का पैसा निकालने में सहायता प्राप्त करें।",
+//     icon: Wallet,
+//     color: "from-fuchsia-500 to-purple-600",
+//   },
+//   {
+//     title: "Ration Card Apply",
+//     description: "नया राशन कार्ड बनवाएं एवं सुधार करवाएं।",
+//     icon: ClipboardList,
+//     color: "from-red-500 to-rose-600",
+//   },
+//   {
+//     title: "Farmer Registration",
+//     description: "किसान पंजीकरण एवं संबंधित सेवाएं प्राप्त करें।",
+//     icon: Sprout,
+//     color: "from-green-500 to-emerald-600",
+//   },
+//   {
+//     title: "E-Shram Card",
+//     description: "ई-श्रम कार्ड के लिए ऑनलाइन पंजीकरण करें।",
+//     icon: HardHat,
+//     color: "from-blue-500 to-indigo-600",
+//   },
+//   {
+//     title: "ABC ID Card",
+//     description: "अपनी ABC आईडी ऑनलाइन बनवाएं।",
+//     icon: IdCard,
+//     color: "from-violet-500 to-purple-600",
+//   },
+//   {
+//     title: "Online Admission",
+//     description: "स्कूल एवं कॉलेज में ऑनलाइन प्रवेश लें।",
+//     icon: Laptop,
+//     color: "from-sky-500 to-blue-600",
+//   },
+//   {
+//     title: "Ayushman Card",
+//     description: "आयुष्मान कार्ड बनवाने की सुविधा प्राप्त करें।",
+//     icon: HeartPulse,
+//     color: "from-orange-500 to-red-500",
+//   },
+//   {
+//     title: "Lagan Receipt",
+//     description: "जमीन की ऑनलाइन लगान रसीद कटवाएं।",
+//     icon: Link,
+//     color: "from-pink-500 to-fuchsia-600",
+//   },
+//   {
+//     title: "Electricity Bill",
+//     description: "बिजली बिल का ऑनलाइन भुगतान करें।",
+//     icon: Zap,
+//     color: "from-amber-500 to-orange-600",
+//   },
+//   {
+//     title: "EWS Certificate",
+//     description: "EWS प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+//     icon: BadgeCheck,
+//     color: "from-green-500 to-emerald-600",
+//   },
+//   {
+//     title: "PM Kisan Apply",
+//     description: "पीएम किसान योजना के लिए आवेदन करें।",
+//     icon: Tractor,
+//     color: "from-blue-600 to-indigo-700",
+//   },
+//   {
+//     title: "Online Form",
+//     description: "सभी प्रकार के ऑनलाइन फॉर्म भरवाएं।",
+//     icon: GraduationCap,
+//     color: "from-violet-500 to-indigo-600",
+//   },
+// ];
+ 
+
+
+// const Services = () => {
+//   return (
+//     <section className="w-full py-20 px-5 sm:px-8 bg-transparent">
+//       <div className="max-w-7xl mx-auto">
+
+//         {/* Heading */}
+//         <motion.div
+//           initial={{ opacity: 0, y: 30 }}
+//           whileInView={{ opacity: 1, y: 0 }}
+//           viewport={{ once: true }}
+//           transition={{ duration: 0.7 }}
+//           className="text-center mb-14"
+//         >
+//           <span className="inline-block px-5 py-2 rounded-full bg-white text-blue-600 text-sm font-semibold border border-blue-100 shadow-sm mb-5">
+//             Riya Cyber Cafe
+//           </span>
+
+//           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
+//             हमारी <span className="text-blue-600">सेवाएं</span>
+//           </h2>
+
+//           <p className="max-w-3xl mx-auto mt-5 text-gray-500 text-base sm:text-lg leading-relaxed">
+//             All Digital, Government and Online Services Available at One Place.
+//           </p>
+//         </motion.div>
+
+//         {/* Services Grid */}
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
+//           {services.map((service, index) => {
+//             const Icon = service.icon;
+
+//             return (
+//               <motion.div
+//                 key={service.title}
+//                 initial={{ opacity: 0, y: 35 }}
+//                 whileInView={{ opacity: 1, y: 0 }}
+//                 viewport={{ once: true }}
+//                 transition={{
+//                   duration: 0.45,
+//                   delay: (index % 4) * 0.08,
+//                 }}
+//                 whileHover={{
+//                   y: -7,
+//                   transition: { duration: 0.25 },
+//                 }}
+//                 className="group flex items-center gap-4 p-5 min-h-[115px] rounded-2xl bg-white border border-blue-100 shadow-[0_5px_20px_rgba(30,90,150,0.06)] hover:shadow-[0_12px_30px_rgba(30,90,150,0.14)] hover:border-blue-300 transition-all duration-300 cursor-pointer"
+//               >
+//                 {/* Icon */}
+//                 <div
+//                   className={`shrink-0 w-[62px] h-[62px] rounded-2xl flex items-center justify-center bg-gradient-to-br ${service.color} shadow-md group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
+//                 >
+//                   <Icon
+//                     size={29}
+//                     strokeWidth={2.2}
+//                     className="text-white"
+//                   />
+//                 </div>
+
+//                 {/* Content */}
+//                 <div className="flex-1 min-w-0">
+//                   <h3 className="text-base sm:text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+//                     {service.title}
+//                   </h3>
+
+//                   <p className="text-xs sm:text-sm text-gray-500 mt-1 leading-relaxed">
+//                     {service.description}
+//                   </p>
+//                 </div>
+//               </motion.div>
+//             );
+//           })}
+
+//         </div>
+
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Services;
+
+
+
+
+
  
 import { motion } from "framer-motion";
 
 import {
+  Printer,
+  Vote,
+  CreditCard,
   Smartphone,
-  Monitor,
+  FileText,
+  House,
+  ClipboardList,
+  Sprout,
+  HardHat,
+  IdCard,
+  Laptop,
+  GraduationCap,
+  HeartPulse,
+  Link,
   Zap,
-  Fuel,
-  ShieldCheck,
-  Construction,
-  Fingerprint,
-  HandCoins,
+  BadgeCheck,
+  Tractor,
+  FileCheck,
+  Wallet,
+  ReceiptText,
 } from "lucide-react";
 
 const services = [
   {
-    title: "Mobile Recharge",
-    description: "Instant prepaid & postpaid recharge for all operators.",
-    icon: Smartphone,
-    color: "from-[#ff9068] to-[#ff5e62]",
+    title: "Aadhaar Card Print",
+    description: "आधार कार्ड प्रिंट एवं संबंधित सेवाएं।",
+    icon: Printer,
+    color: "from-orange-500 to-orange-600",
   },
   {
-    title: "DTH Recharge",
-    description: "Recharge any DTH provider in seconds.",
-    icon: Monitor,
-    color: "from-[#38bdf8] to-[#06d6e9]",
+    title: "Voter Card Apply",
+    description: "नया वोटर कार्ड बनवाएं एवं सुधार करवाएं।",
+    icon: Vote,
+    color: "from-green-500 to-green-600",
+  },
+  {
+    title: "PAN Card Apply",
+    description: "नया पैन कार्ड बनवाएं एवं सुधार करवाएं।",
+    icon: CreditCard,
+    color: "from-blue-500 to-blue-600",
+  },
+  {
+    title: "Mobile Recharge",
+    description: "प्रीपेड एवं पोस्टपेड मोबाइल रिचार्ज करें।",
+    icon: Smartphone,
+    color: "from-purple-500 to-purple-600",
+  },
+  {
+    title: "Caste Certificate",
+    description: "जाति प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+    icon: FileText,
+    color: "from-indigo-500 to-indigo-600",
+  },
+  {
+    title: "Income Certificate",
+    description: "आय प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+    icon: ReceiptText,
+    color: "from-pink-500 to-pink-600",
+  },
+  {
+    title: "Residence Certificate",
+    description: "निवास प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+    icon: House,
+    color: "from-orange-500 to-amber-600",
+  },
+  {
+    title: "Character Certificate",
+    description: "आचरण प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+    icon: FileCheck,
+    color: "from-red-500 to-red-600",
+  },
+  {
+    title: "PF Withdrawal",
+    description: "पीएफ का पैसा निकालने में सहायता प्राप्त करें।",
+    icon: Wallet,
+    color: "from-fuchsia-500 to-purple-600",
+  },
+  {
+    title: "Ration Card Apply",
+    description: "नया राशन कार्ड बनवाएं एवं सुधार करवाएं।",
+    icon: ClipboardList,
+    color: "from-red-500 to-rose-600",
+  },
+  {
+    title: "Farmer Registration",
+    description: "किसान पंजीकरण एवं संबंधित सेवाएं प्राप्त करें।",
+    icon: Sprout,
+    color: "from-green-500 to-emerald-600",
+  },
+  {
+    title: "E-Shram Card",
+    description: "ई-श्रम कार्ड के लिए ऑनलाइन पंजीकरण करें।",
+    icon: HardHat,
+    color: "from-blue-500 to-indigo-600",
+  },
+  {
+    title: "ABC ID Card",
+    description: "अपनी ABC आईडी ऑनलाइन बनवाएं।",
+    icon: IdCard,
+    color: "from-violet-500 to-purple-600",
+  },
+  {
+    title: "Online Admission",
+    description: "स्कूल एवं कॉलेज में ऑनलाइन प्रवेश लें।",
+    icon: Laptop,
+    color: "from-sky-500 to-blue-600",
+  },
+  {
+    title: "Ayushman Card",
+    description: "आयुष्मान कार्ड बनवाने की सुविधा प्राप्त करें।",
+    icon: HeartPulse,
+    color: "from-orange-500 to-red-500",
+  },
+  {
+    title: "Lagan Receipt",
+    description: "जमीन की ऑनलाइन लगान रसीद कटवाएं।",
+    icon: Link,
+    color: "from-pink-500 to-fuchsia-600",
   },
   {
     title: "Electricity Bill",
-    description: "Pay electricity bills from any state instantly.",
+    description: "बिजली बिल का ऑनलाइन भुगतान करें।",
     icon: Zap,
-    color: "from-[#34d399] to-[#2dd4bf]",
+    color: "from-amber-500 to-orange-600",
   },
   {
-    title: "Gas Bill",
-    description: "Pay PNG & LPG gas bills securely.",
-    icon: Fuel,
-    color: "from-[#fbbf24] to-[#f59e0b]",
+    title: "EWS Certificate",
+    description: "EWS प्रमाण पत्र के लिए ऑनलाइन आवेदन करें।",
+    icon: BadgeCheck,
+    color: "from-green-500 to-emerald-600",
   },
   {
-    title: "Insurance",
-    description: "Renew your health or vehicle insurance online.",
-    icon: ShieldCheck,
-    color: "from-[#a855f7] to-[#6d28d9]",
+    title: "PM Kisan Apply",
+    description: "पीएम किसान योजना के लिए आवेदन करें।",
+    icon: Tractor,
+    color: "from-blue-600 to-indigo-700",
   },
   {
-    title: "FASTag",
-    description: "Recharge FASTag for any bank instantly.",
-    icon: Construction,
-    color: "from-[#06b6d4] to-[#2563eb]",
-  },
-  {
-    title: "AEPS / Micro ATM",
-    description: "Cash withdrawal, mini statement & balance check.",
-    icon: Fingerprint,
-    color: "from-[#06b6d4] to-[#4f46e5]",
-  },
-  {
-    title: "Loan / EMI",
-    description: "Pay EMI, broadband or postpaid bills easily.",
-    icon: HandCoins,
-    color: "from-[#fb7185] to-[#ec4899]",
+    title: "Online Form",
+    description: "सभी प्रकार के ऑनलाइन फॉर्म भरवाएं।",
+    icon: GraduationCap,
+    color: "from-violet-500 to-indigo-600",
   },
 ];
 
 const Services = () => {
   return (
     <section className="w-full py-20 px-5 sm:px-8 bg-transparent">
-
       <div className="max-w-7xl mx-auto">
 
         {/* Heading */}
@@ -76,26 +395,24 @@ const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-
-          <span className="inline-block px-5 py-2 rounded-full bg-white text-[#369fa3] text-sm font-semibold border border-[#d5eeee] shadow-sm mb-5">
-            What We Offer
+          <span className="inline-block px-5 py-2 rounded-full bg-white text-blue-600 text-sm font-semibold border border-blue-100 shadow-sm mb-5">
+            Riya Cyber Cafe
           </span>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">
-            Our <span className="text-[#55b9b5]">Tech Services</span>
+            हमारी{" "}
+            <span className="text-blue-600">सेवाएं</span>
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-500 text-base sm:text-lg md:text-xl leading-relaxed">
-            Explore our wide range of technology solutions
-            designed to make your digital life easier.
+          <p className="max-w-3xl mx-auto mt-5 text-gray-500 text-base sm:text-lg leading-relaxed">
+            सभी डिजिटल, सरकारी एवं ऑनलाइन सेवाएं अब एक ही स्थान पर।
           </p>
-
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
 
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -103,43 +420,46 @@ const Services = () => {
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{
-                  duration: 0.5,
-                  delay: (index % 4) * 0.1,
+                  duration: 0.45,
+                  delay: (index % 4) * 0.08,
                 }}
                 whileHover={{
-                  y: -10,
-                  transition: { duration: 0.3 },
+                  y: -7,
+                  transition: { duration: 0.25 },
                 }}
-                className="group min-h-[300px] flex flex-col items-center justify-center text-center px-6 py-10 rounded-[25px] bg-white border border-[#dff0ef] shadow-[0_8px_30px_rgba(50,120,120,0.06)] hover:shadow-[0_15px_40px_rgba(50,150,150,0.15)] hover:border-[#55b9b5]/50 transition-all duration-300 cursor-pointer"
+                className="group relative aspect-square flex flex-col items-center justify-center text-center p-4 sm:p-6 rounded-2xl bg-white border border-blue-100 shadow-[0_5px_20px_rgba(30,90,150,0.06)] hover:shadow-[0_15px_35px_rgba(30,90,150,0.15)] hover:border-blue-300 transition-all duration-300 cursor-pointer overflow-hidden"
               >
+
+                {/* Background Decoration */}
+                <div className="absolute -top-10 -right-10 w-28 h-28 rounded-full bg-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                 {/* Icon */}
                 <div
-                  className={`w-[76px] h-[76px] rounded-2xl flex items-center justify-center bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
+                  className={`relative shrink-0 w-14 h-14 sm:w-[72px] sm:h-[72px] rounded-2xl flex items-center justify-center bg-gradient-to-br ${service.color} shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300`}
                 >
                   <Icon
-                    size={35}
-                    strokeWidth={2.5}
+                    size={32}
+                    strokeWidth={2.2}
                     className="text-white"
                   />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-gray-800 mt-7 group-hover:text-[#369fa3] transition-colors duration-300">
+                <h3 className="relative text-sm sm:text-lg font-bold text-gray-800 mt-4 group-hover:text-blue-600 transition-colors duration-300">
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-500 text-base leading-relaxed mt-3 max-w-[270px]">
+                <p className="relative text-[11px] sm:text-sm text-gray-500 mt-2 leading-relaxed line-clamp-2">
                   {service.description}
                 </p>
 
                 {/* Bottom Accent */}
-                <div className="w-10 h-1 rounded-full bg-[#55b9b5]/30 mt-6 group-hover:w-20 group-hover:bg-[#55b9b5] transition-all duration-300" />
+                <div className="relative w-8 h-1 rounded-full bg-blue-200 mt-4 group-hover:w-14 group-hover:bg-blue-500 transition-all duration-300" />
 
               </motion.div>
             );
@@ -153,4 +473,3 @@ const Services = () => {
 
 export default Services;
  
-
