@@ -6,7 +6,7 @@ import envConfig from "../config/env.js";
 
 export const addMoneyController = asyncHandler(async (req, res) => {
   const { amount } = req.body;
-
+         
   if (!Number.isInteger(amount) || amount < 100 || amount > 2000) {
     throw new AppError(" Invalid amount", 400);
   }

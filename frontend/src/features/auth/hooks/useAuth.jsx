@@ -1,8 +1,7 @@
 import  { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { forgetPasswordUser, getMeUser, loginUser, logOutUser, registerUser, resendOtpUser, resetPasswordUser, verifyEmailUser, verifyResetPasswordUser } from "../state/authAction";
-import { ReducerType } from "@reduxjs/toolkit";
-
+ 
 export const useAuth = () => {
   const { authData, isLoading, isLoggingIn, error,isRegistering,isVerifyingEmail,isResendOtp} = useSelector((state) => state.auth);
   const dispatch = useDispatch();

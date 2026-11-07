@@ -18,8 +18,8 @@ import Services from "../features/home/Services";
 import Contact from "../features/home/Contact";
 import Home from "../features/home/home";
 import DashboardAsideBar from "../features/dashboard/pages/DashboardAsideBar";
-import Wallet from "../features/dashboard/pages/wallet/wallet";
-     
+import Wallet from "../features/dashboard/pages/wallet/ui/Wallet";
+      
 const AppRoutes = createBrowserRouter([
   {
     path: "/",

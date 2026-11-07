@@ -12,8 +12,7 @@ import { creditWallet } from "../services/wallet.services.js";
 
 export const verifyPaymentController = asyncHandler(async (req, res) => {
 
-  // 1. Get payment details from frontend
-
+ 
   const {
     razorpay_order_id,
     razorpay_payment_id,
