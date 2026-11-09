@@ -1,4 +1,3 @@
- 
 import React from "react";
 import { NavLink } from "react-router";
 import { motion } from "framer-motion";
@@ -6,12 +5,14 @@ import { motion } from "framer-motion";
 import {
   LayoutDashboard,
   UserRound,
+  Wallet,
   LogOut,
   ShieldCheck,
   ChevronRight,
 } from "lucide-react";
 
 const DashboardAsideBar = ({ onLogout }) => {
+
   const menuItems = [
     {
       title: "Dashboard",
@@ -26,27 +27,28 @@ const DashboardAsideBar = ({ onLogout }) => {
     {
       title: "My Wallet",
       path: "/dashboard/wallet",
-      icon: UserRound,
+      icon: Wallet,
     },
   ];
 
   return (
-    <aside className="w-full lg:w-[280px] shrink-0">
+    <aside className="w-full lg:w-[260px] xl:w-[280px] shrink-0">
 
-      <div className="bg-white border border-[#dff0ef] rounded-3xl p-5 shadow-[0_8px_30px_rgba(50,120,120,0.06)]">
+      <div className="bg-white border border-[#d5eeee] rounded-2xl p-3 sm:p-4 lg:p-5 lg:sticky lg:top-6">
 
-        {/* Logo / Profile Section */}
-        <div className="flex items-center gap-3 px-2 py-4 mb-6 border-b border-gray-100">
+        {/* Logo */}
+        <div className="flex items-center gap-3 px-2 py-3 lg:py-4 lg:mb-6 lg:border-b border-[#edf3f3]">
 
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#55b9b5] to-[#258b91] flex items-center justify-center shadow-lg shadow-teal-100">
-            <ShieldCheck size={27} className="text-white" />
+          <div className="w-10 h-10 lg:w-12 lg:h-12 shrink-0 rounded-xl bg-[#e5f5f4] flex items-center justify-center text-[#369fa3]">
+            <ShieldCheck size={25} />
           </div>
 
-          <div>
-            <h2 className="text-lg font-extrabold text-gray-800">
+          <div className="min-w-0">
+            <h2 className="text-base lg:text-lg font-semibold text-gray-800 truncate">
               Riya Cyber Cafe
             </h2>
-            <p className="text-xs text-gray-500 mt-1">
+
+            <p className="text-xs text-gray-500 mt-0.5">
               User Dashboard
             </p>
           </div>
@@ -54,14 +56,14 @@ const DashboardAsideBar = ({ onLogout }) => {
         </div>
 
         {/* Menu Heading */}
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-3 mb-3">
+        <p className="hidden lg:block text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-3">
           Main Menu
         </p>
 
         {/* Navigation */}
-        <nav className="flex flex-col gap-2">
+        <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible">
 
-          {menuItems.map((item, index) => {
+          {menuItems.map((item) => {
             const Icon = item.icon;
 
             return (
@@ -70,35 +72,30 @@ const DashboardAsideBar = ({ onLogout }) => {
                 to={item.path}
                 end={item.path === "/dashboard"}
                 className={({ isActive }) =>
-                  `group relative flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 ${
+                  `group flex shrink-0 lg:w-full items-center justify-between gap-2 px-3 sm:px-4 py-3 rounded-xl text-sm font-medium transition-colors duration-200 ${
                     isActive
-                      ? "bg-gradient-to-r from-[#55b9b5] to-[#369fa3] text-white shadow-lg shadow-teal-100"
-                      : "text-gray-600 hover:bg-[#effafa] hover:text-[#258b91]"
+                      ? "bg-[#e5f5f4] text-[#258b91]"
+                      : "text-gray-600 hover:bg-[#f4fafa] hover:text-[#258b91]"
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5">
 
-                      <Icon
-                        size={21}
-                        strokeWidth={2}
-                      />
+                      <Icon size={19} />
 
-                      <span className="font-semibold text-sm">
+                      <span className="whitespace-nowrap">
                         {item.title}
                       </span>
 
                     </div>
 
                     {isActive && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -5 }}
-                        animate={{ opacity: 1, x: 0 }}
-                      >
-                        <ChevronRight size={19} />
-                      </motion.div>
+                      <ChevronRight
+                        size={17}
+                        className="hidden lg:block"
+                      />
                     )}
                   </>
                 )}
@@ -109,30 +106,27 @@ const DashboardAsideBar = ({ onLogout }) => {
         </nav>
 
         {/* Account Section */}
-        <div className="mt-8 pt-6 border-t border-gray-100">
+        <div className="hidden lg:block mt-7 pt-5 border-t border-[#edf3f3]">
 
-          <p className="text-xs font-bold text-gray-400 uppercase tracking-widest px-3 mb-3">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3 mb-3">
             Account
           </p>
-           
 
-          {/* Logout Button */}
-          <motion.button
-            whileHover={{ x: 4 }}
-            whileTap={{ scale: 0.97 }}
+          <button
+            type="button"
             onClick={onLogout}
-            className="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-red-500 hover:bg-red-50 transition-all duration-300 font-semibold text-sm"
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors"
           >
-            <LogOut size={21} />
+            <LogOut size={19} />
             Logout
-          </motion.button>
+          </button>
 
         </div>
 
-        {/* Bottom Info */}
-        <div className="mt-8 p-4 rounded-2xl bg-gradient-to-br from-[#effafa] to-[#e2f5f4] border border-[#d5eeee]">
+        {/* Help Section */}
+        <div className="hidden lg:block mt-6 p-4 rounded-xl bg-[#effafa] border border-[#d5eeee]">
 
-          <p className="text-sm font-bold text-[#258b91]">
+          <p className="text-sm font-semibold text-[#258b91]">
             Need Help?
           </p>
 
@@ -149,4 +143,3 @@ const DashboardAsideBar = ({ onLogout }) => {
 };
 
 export default DashboardAsideBar;
- 

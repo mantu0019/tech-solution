@@ -22,8 +22,8 @@ import Contact from "../features/home/Contact";
 import Home from "../features/home/home";
 
  
-import DashboardAsideBar from "../features/dashboard/pages/DashboardAsideBar";
-import Wallet from "../features/dashboard/pages/wallet/ui/Wallet";
+ import Wallet from "../features/dashboard/pages/wallet/ui/Wallet";
+import Dashboards from "../features/dashboard/pages/Dashboards";
 
 const AppRoutes = createBrowserRouter([
  
@@ -94,7 +94,7 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashboardAsideBar />,
+        element: <Dashboards />,
       },
       {
         path: "profile",
