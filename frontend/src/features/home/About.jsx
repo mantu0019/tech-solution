@@ -1,4 +1,4 @@
-import React from "react";
+    
 import { motion } from "framer-motion";
 import {
   Target,
@@ -66,8 +66,8 @@ const About = () => {
               transition={{ duration: 0.8 }}
             >
               <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#d5eeee] text-[#369fa3] text-sm font-semibold shadow-sm mb-7">
-                <span className="w-2 h-2 rounded-full bg-[#55b9b5] animate-pulse" />
-                About TechSolution
+                <span className="w-2 h-2 capitalize rounded-full bg-[#55b9b5] animate-pulse" />
+                About Riya cyber cafe
               </span>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">

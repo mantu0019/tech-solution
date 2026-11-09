@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMoneyUser, verifyPaymentUser } from "./walletAction";
+import { addMoneyUser, totalWalletBalanceUser, verifyPaymentUser } from "./walletAction";
  
 const walletSlice = createSlice({
     name:"wallet",
@@ -7,7 +7,7 @@ const walletSlice = createSlice({
         walletBalance:0,
         isWalletLoading:false,
         error:null
-    },
+    },  
     extraReducers:(builder)=>{
           return builder.addCase(addMoneyUser.pending,(state)=>{
             state.isWalletLoading = true;
@@ -35,6 +35,23 @@ const walletSlice = createSlice({
             state.isWalletLoading = false;
             state.error = action?.payload || "something went wrong";
             
+          })
+          // totalWalletBalance
+
+          .addCase(totalWalletBalanceUser.pending,(state)=>{
+            state.isWalletLoading = true;
+            state.error = null;
+             
+
+          }).addCase(totalWalletBalanceUser.fulfilled,(state,action)=>{
+            state.isWalletLoading =false;
+            state.error = null;
+            state.walletBalance = action.payload.data.walletBalance;
+          })
+
+          .addCase(totalWalletBalanceUser.rejected,(state,action)=>{
+            state.isWalletLoading = false;
+            state.error = action?.payload || "something went wrong";
           })
     }
 })

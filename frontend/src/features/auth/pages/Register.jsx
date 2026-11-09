@@ -6,8 +6,8 @@ import Loading from "../../../components/Loading";
 
 const Eye = ({ open }) => (
   <svg
-    width="18"
-    height="18"
+    width="16"
+    height="16"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -34,22 +34,28 @@ const Eye = ({ open }) => (
 
 const getStrength = (v) => {
   if (!v) return { score: 0, label: "" };
+
   let score = 0;
+
   if (v.length >= 8) score++;
   if (/[A-Z]/.test(v)) score++;
   if (/[a-z]/.test(v)) score++;
   if (/[0-9]/.test(v)) score++;
   if (/[^A-Za-z0-9]/.test(v)) score++;
+
   if (score <= 2) return { score, label: "Weak" };
   if (score <= 4) return { score, label: "Medium" };
+
   return { score, label: "Strong" };
 };
 
 const Register = () => {
   const [showPw, setShowPw] = useState(false);
   const [showCpw, setShowCpw] = useState(false);
+
   const { isRegistering, error, registerByUser } = useAuth();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -63,12 +69,14 @@ const Register = () => {
   const onSubmit = async (data) => {
     try {
       const { confirmPassword, ...registerData } = data;
+
       await registerByUser(registerData);
+
       console.log("register data", registerData.email);
 
       navigate("/verify-email", {
         state: {
-          email:registerData?.email,
+          email: registerData?.email,
         },
       });
     } catch (error) {
@@ -77,63 +85,92 @@ const Register = () => {
   };
 
   const inputClass = (hasError) =>
-    `w-full rounded-xl border bg-[#f1f1ef] px-4 py-3.5 text-sm text-[#1c1c1c] placeholder:text-[#a1a19a] outline-none transition-colors duration-200 focus:bg-white ${
-      hasError ? "border-[#d9534f]" : "border-[#e2e2de] focus:border-[#1c1c1c]"
+    `w-full rounded-lg border bg-white/80 px-3.5 py-2.5 text-[13px] text-gray-800 placeholder:text-gray-400 outline-none transition-all duration-200 focus:bg-white focus:ring-4 focus:ring-[#55b9b5]/10 ${
+      hasError
+        ? "border-red-400 focus:border-red-400"
+        : "border-gray-200 focus:border-[#55b9b5]"
     }`;
 
-  const labelClass = "mb-2 block text-xs font-medium text-[#55554f]";
-  const errorClass = "mt-1.5 text-xs text-[#c9433f]";
+  const labelClass = "mb-1 block text-[13px] font-medium text-gray-700";
+
+  const errorClass = "mt-1 text-[11px] leading-tight text-red-500";
+
   const eyeButton =
-    "absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1.5 text-[#a1a19a] transition hover:text-[#1c1c1c] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1c1c1c]/30";
+    "absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-gray-400 transition hover:text-[#319fa1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#55b9b5]/30";
 
   const barColor =
     strength.label === "Weak"
-      ? "bg-[#d9534f]"
+      ? "bg-red-400"
       : strength.label === "Medium"
-        ? "bg-[#a1a19a]"
-        : "bg-[#1c1c1c]";
+        ? "bg-amber-400"
+        : "bg-[#319fa1]";
 
   if (isRegistering) {
     return <Loading />;
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f1f1ef] px-4 py-10">
-      <section className="w-full max-w-[400px] rounded-3xl border border-[#e8e8e4] bg-[#fbfbfa] p-7 shadow-[0_20px_50px_rgba(28,28,28,0.07)] sm:p-9">
-        <header className="mb-8 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight text-[#1c1c1c]">
-            Create account
-          </h1>
-          <p className="mt-1.5 text-sm text-[#77776f]">
-            Start your journey with us.
-          </p>
+    <main className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#eaf7f7] px-4 py-4">
 
-          {error && (
-            <p
-              role="alert"
-              className="mb-4 rounded-lg border capitalize border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
-            >
-              {typeof error === "string" ? error : error.message}
-            </p>
-          )}
+      {/* Background Gradient */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-10 left-[-80px] h-72 w-72 rounded-full bg-[#55b9b5]/25 blur-3xl" />
+
+        <div className="absolute bottom-0 right-[-70px] h-80 w-80 rounded-full bg-[#369fa3]/20 blur-3xl" />
+
+        <div className="absolute top-1/2 left-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/60 blur-3xl" />
+      </div>
+
+      {/* Register Card */}
+      <section className="relative z-10 my-auto w-full max-w-[520px] rounded-3xl border border-white/90 bg-white/85 p-5 shadow-[0_20px_60px_rgba(50,120,120,0.13)] backdrop-blur-xl sm:px-8 sm:py-6">
+
+        {/* Logo */}
+        <Link
+          to="/"
+          className="mb-3 block text-center text-xl font-extrabold tracking-tight text-gray-900"
+        >
+          Riya<span className="text-[#55b9b5]">Cyber Cafe</span>
+        </Link>
+
+        {/* Header */}
+        <header className="mb-4 text-center">
+           
+          <h1 className="text-xl font-bold tracking-tight text-gray-900">
+            Create Account
+          </h1>
+
+          
         </header>
 
+        {/* API Error */}
+        {error && (
+          <p
+            role="alert"
+            className="mb-3 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-center text-[13px] text-red-600"
+          >
+            {typeof error === "string" ? error : error.message}
+          </p>
+        )}
+
+        {/* Register Form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           noValidate
-          className="space-y-4"
+          className="space-y-3"
         >
-          {/* Full name */}
+
+          {/* Full Name */}
           <div>
             <label htmlFor="fullname" className={labelClass}>
-              Full name
+              Full Name
             </label>
+
             <input
               id="fullname"
               type="text"
               placeholder="Your full name"
               autoComplete="name"
-              aria-invalid={!!errors.fullname}
+              aria-invalid={!!errors.fullName}
               {...register("fullName", {
                 required: "Full name is required",
                 minLength: {
@@ -145,15 +182,16 @@ const Register = () => {
                   message: "Name cannot exceed 50 characters",
                 },
                 pattern: {
-                  value: /^[a-zA-Z]+(?:[ '\-][a-zA-Z]+)*$/,
+                  value: /^[a-zA-Z]+(?:[ '-][a-zA-Z]+)*$/,
                   message: "Please enter a valid name",
                 },
               })}
-              className={inputClass(!!errors.fullname)}
+              className={inputClass(!!errors.fullName)}
             />
-            {errors.fullname && (
+
+            {errors.fullName && (
               <p role="alert" className={errorClass}>
-                {errors.fullname.message}
+                {errors.fullName.message}
               </p>
             )}
           </div>
@@ -161,8 +199,9 @@ const Register = () => {
           {/* Email */}
           <div>
             <label htmlFor="email" className={labelClass}>
-              Email address
+              Email Address
             </label>
+
             <input
               id="email"
               type="email"
@@ -178,6 +217,7 @@ const Register = () => {
               })}
               className={inputClass(!!errors.email)}
             />
+
             {errors.email && (
               <p role="alert" className={errorClass}>
                 {errors.email.message}
@@ -185,139 +225,164 @@ const Register = () => {
             )}
           </div>
 
-          {/* Password */}
-          <div>
-            <label htmlFor="password" className={labelClass}>
-              Password
-            </label>
-            <div className="relative">
-              <input
-                id="password"
-                type={showPw ? "text" : "password"}
-                placeholder="Create a strong password"
-                autoComplete="new-password"
-                aria-invalid={!!errors.password}
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 8,
-                    message: "Password must contain at least 8 characters",
-                  },
-                  maxLength: {
-                    value: 64,
-                    message: "Password cannot exceed 64 characters",
-                  },
-                  validate: {
-                    uppercase: (v) =>
-                      /[A-Z]/.test(v) ||
-                      "Include at least one uppercase letter",
-                    lowercase: (v) =>
-                      /[a-z]/.test(v) ||
-                      "Include at least one lowercase letter",
-                    number: (v) =>
-                      /[0-9]/.test(v) || "Include at least one number",
-                  },
-                })}
-                className={`${inputClass(!!errors.password)} pr-12`}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPw((p) => !p)}
-                aria-label={showPw ? "Hide password" : "Show password"}
-                aria-pressed={showPw}
-                className={eyeButton}
-              >
-                <Eye open={showPw} />
-              </button>
-            </div>
-            {errors.password && (
-              <p role="alert" className={errorClass}>
-                {errors.password.message}
-              </p>
-            )}
+          {/* Password + Confirm Password (side by side) */}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 
-            {password && (
-              <div className="mt-3 flex items-center gap-3">
-                <div className="flex flex-1 gap-1">
-                  {[1, 2, 3, 4, 5].map((level) => (
-                    <div
-                      key={level}
-                      className={`h-1 flex-1 rounded-full transition-colors duration-200 ${
-                        level <= strength.score ? barColor : "bg-[#e2e2de]"
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="w-14 text-right text-xs text-[#77776f]">
-                  {strength.label}
-                </span>
+            {/* Password */}
+            <div>
+              <label htmlFor="password" className={labelClass}>
+                Password
+              </label>
+
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPw ? "text" : "password"}
+                  placeholder="Create password"
+                  autoComplete="new-password"
+                  aria-invalid={!!errors.password}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Password must contain at least 8 characters",
+                    },
+                    maxLength: {
+                      value: 64,
+                      message: "Password cannot exceed 64 characters",
+                    },
+                    validate: {
+                      uppercase: (v) =>
+                        /[A-Z]/.test(v) ||
+                        "Include at least one uppercase letter",
+
+                      lowercase: (v) =>
+                        /[a-z]/.test(v) ||
+                        "Include at least one lowercase letter",
+
+                      number: (v) =>
+                        /[0-9]/.test(v) ||
+                        "Include at least one number",
+                    },
+                  })}
+                  className={`${inputClass(!!errors.password)} pr-10`}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPw((p) => !p)}
+                  aria-label={showPw ? "Hide password" : "Show password"}
+                  aria-pressed={showPw}
+                  className={eyeButton}
+                >
+                  <Eye open={showPw} />
+                </button>
               </div>
-            )}
-          </div>
 
-          {/* Confirm password */}
-          <div>
-            <label htmlFor="confirmPassword" className={labelClass}>
-              Confirm password
-            </label>
-            <div className="relative">
-              <input
-                id="confirmPassword"
-                type={showCpw ? "text" : "password"}
-                placeholder="Re-enter your password"
-                autoComplete="new-password"
-                aria-invalid={!!errors.confirmPassword}
-                {...register("confirmPassword", {
-                  required: "Please confirm your password",
-                  validate: (v) => v === password || "Passwords do not match",
-                })}
-                className={`${inputClass(!!errors.confirmPassword)} pr-12`}
-              />
-              <button
-                type="button"
-                onClick={() => setShowCpw((p) => !p)}
-                aria-label={
-                  showCpw ? "Hide confirm password" : "Show confirm password"
-                }
-                aria-pressed={showCpw}
-                className={eyeButton}
-              >
-                <Eye open={showCpw} />
-              </button>
+              {errors.password && (
+                <p role="alert" className={errorClass}>
+                  {errors.password.message}
+                </p>
+              )}
             </div>
-            {errors.confirmPassword && (
-              <p role="alert" className={errorClass}>
-                {errors.confirmPassword.message}
-              </p>
-            )}
+
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="confirmPassword" className={labelClass}>
+                Confirm Password
+              </label>
+
+              <div className="relative">
+                <input
+                  id="confirmPassword"
+                  type={showCpw ? "text" : "password"}
+                  placeholder="Re-enter password"
+                  autoComplete="new-password"
+                  aria-invalid={!!errors.confirmPassword}
+                  {...register("confirmPassword", {
+                    required: "Please confirm your password",
+                    validate: (v) =>
+                      v === password || "Passwords do not match",
+                  })}
+                  className={`${inputClass(!!errors.confirmPassword)} pr-10`}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowCpw((p) => !p)}
+                  aria-label={
+                    showCpw ? "Hide confirm password" : "Show confirm password"
+                  }
+                  aria-pressed={showCpw}
+                  className={eyeButton}
+                >
+                  <Eye open={showCpw} />
+                </button>
+              </div>
+
+              {errors.confirmPassword && (
+                <p role="alert" className={errorClass}>
+                  {errors.confirmPassword.message}
+                </p>
+              )}
+            </div>
           </div>
 
-          {/* Submit */}
+          {/* Password Strength (full width, sirf typing par dikhega) */}
+          {password && (
+            <div className="flex items-center gap-2.5">
+              <div className="flex flex-1 gap-1">
+                {[1, 2, 3, 4, 5].map((level) => (
+                  <div
+                    key={level}
+                    className={`h-1 flex-1 rounded-full transition-colors duration-200 ${
+                      level <= strength.score ? barColor : "bg-gray-200"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <span className="w-12 text-right text-[11px] font-medium text-gray-500">
+                {strength.label}
+              </span>
+            </div>
+          )}
+
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={isSubmitting}
-            className="!mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#1c1c1c] px-4 py-3.5 text-sm font-semibold text-[#f5f5f3] transition duration-200 hover:bg-[#333331] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black/10 disabled:cursor-not-allowed disabled:opacity-60"
+            className="!mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#55b9b5] to-[#369fa3] px-4 py-2.5 text-[13px] font-semibold text-white shadow-lg shadow-[#369fa3]/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-[#369fa3]/25 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#55b9b5]/20 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting ? (
               <>
-                <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                Creating account...
+                <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                Creating Account...
               </>
             ) : (
-              "Create account"
+              "Create Account"
             )}
           </button>
         </form>
 
-        <p className="mt-7 text-center text-sm text-[#77776f]">
+        {/* Login Link */}
+        <p className="mt-4 text-center text-[13px] text-gray-500">
           Already have an account?{" "}
           <Link
-            to="/"
-            className="font-medium text-[#1c1c1c] underline-offset-4 transition hover:underline"
+            to="/login"
+            className="font-semibold text-[#319fa1] transition hover:text-[#237d80] hover:underline"
           >
             Login
           </Link>
         </p>
+
+        {/* Bottom Branding */}
+        <div className="mt-3 border-t border-gray-100 pt-2 text-center">
+          <p className="text-[11px] text-gray-400">
+            © {new Date().getFullYear()} Riya Cyber Cafe. All rights reserved.
+          </p>
+        </div>
+
       </section>
     </main>
   );

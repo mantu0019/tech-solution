@@ -19,3 +19,11 @@ export const verifyPayment = async ({
 
   return res.data;
 };
+
+
+
+export const totalWalletBalance = async()=>{
+
+    const res  = await apiInstance.get("/api/wallet/total-wallet-balance");
+    return res.data;
+}

@@ -3,11 +3,12 @@
  
 import { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router";
+import useAuth from "../auth/hooks/useAuth";
  
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const {authData}  = useAuth()
   const navLinkClass = ({ isActive }) =>
     `px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
       isActive
@@ -101,6 +102,9 @@ const Nav = () => {
               <NavLink to="/contact" className={navLinkClass}>
                 Contact
               </NavLink>
+              <NavLink to="/dashboard" className={navLinkClass}>
+                Dashboard
+              </NavLink>
 
             </div>
 
@@ -109,7 +113,10 @@ const Nav = () => {
               to="/login"
               className="hidden md:block px-7 py-3 rounded-full bg-gradient-to-r from-[#55b9b5] to-[#369fa3] text-white text-sm font-semibold shadow-md hover:-translate-y-0.5 active:scale-95 transition-all duration-300 whitespace-nowrap"
             >
-              Login
+              {
+                
+                 authData ? `${authData.userData.fullName}`: "Login"
+              }
             </Link>
 
             {/* Mobile Navigation */}
@@ -182,5 +189,13 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+
  
  
+
+
+ 
+
+  

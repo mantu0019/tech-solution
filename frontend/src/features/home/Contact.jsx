@@ -1,6 +1,5 @@
- 
- 
 import { motion } from "framer-motion";
+
 import {
   Mail,
   Phone,
@@ -19,18 +18,24 @@ import {
 } from "react-icons/fa";
 
 const Contact = () => {
+  const phoneNumber = "8538985173";
+  const whatsappNumber = "918538985173";
+  const emailAddress = "ranjantiuri.info@gmail.com";
+
   const contactInfo = [
     {
       icon: Mail,
       title: "Email Us",
-      value: "support@techsolution.com",
+      value: emailAddress,
       description: "Send us an email anytime.",
+      href: `mailto:${emailAddress}`,
     },
     {
       icon: Phone,
       title: "Call Us",
-      value: "+91 98765 43210",
+      value: phoneNumber,
       description: "Mon - Sat, 9 AM to 6 PM.",
+      href: `tel:+91${phoneNumber}`,
     },
     {
       icon: MapPin,
@@ -46,11 +51,35 @@ const Contact = () => {
     },
   ];
 
+  // WhatsApp message handler
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Connect your backend API here.
-    alert("Thank you! Your message has been submitted.");
+    const formData = new FormData(e.currentTarget);
+
+    const fullName = formData.get("fullName")?.trim();
+    const email = formData.get("email")?.trim();
+    const subject = formData.get("subject")?.trim();
+    const message = formData.get("message")?.trim();
+
+    const whatsappMessage = `
+Hello, I want to contact you.
+
+Name: ${fullName}
+Email: ${email}
+Subject: ${subject}
+
+Message:
+${message}
+    `.trim();
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+    e.currentTarget.reset();
   };
 
   return (
@@ -74,6 +103,7 @@ const Contact = () => {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight">
               Let's Start A
+
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#55b9b5] to-[#258b91]">
                 Conversation.
               </span>
@@ -86,8 +116,11 @@ const Contact = () => {
             </p>
 
           </motion.div>
+
         </div>
+
       </section>
+
 
       {/* CONTACT INFORMATION */}
       <section className="px-5 sm:px-8 py-10">
@@ -97,22 +130,11 @@ const Contact = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
             {contactInfo.map((item, index) => {
+
               const Icon = item.icon;
 
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: index * 0.1,
-                  }}
-                  whileHover={{ y: -8 }}
-                  className="bg-white rounded-[25px] p-7 border border-[#dff0ef] shadow-[0_8px_30px_rgba(50,120,120,0.06)] hover:shadow-[0_15px_40px_rgba(50,150,150,0.12)] transition-all duration-300"
-                >
-
+              const CardContent = (
+                <>
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#55b9b5] to-[#369fa3] flex items-center justify-center shadow-lg">
                     <Icon size={27} className="text-white" />
                   </div>
@@ -128,14 +150,48 @@ const Contact = () => {
                   <p className="text-gray-500 text-sm mt-2">
                     {item.description}
                   </p>
+                </>
+              );
+
+              const cardClass =
+                "bg-white rounded-[25px] p-7 border border-[#dff0ef] shadow-[0_8px_30px_rgba(50,120,120,0.06)] hover:shadow-[0_15px_40px_rgba(50,150,150,0.12)] transition-all duration-300 block";
+
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                  }}
+                  whileHover={{ y: -8 }}
+                >
+
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className={cardClass}
+                    >
+                      {CardContent}
+                    </a>
+                  ) : (
+                    <div className={cardClass}>
+                      {CardContent}
+                    </div>
+                  )}
 
                 </motion.div>
               );
             })}
 
           </div>
+
         </div>
+
       </section>
+
 
       {/* CONTACT FORM SECTION */}
       <section className="px-5 sm:px-8 py-20">
@@ -158,6 +214,7 @@ const Contact = () => {
 
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
                 We're Here To
+
                 <span className="block text-[#55b9b5]">
                   Help You.
                 </span>
@@ -169,7 +226,8 @@ const Contact = () => {
                 feel free to contact us.
               </p>
 
-              {/* Support Card */}
+
+              {/* SUPPORT CARD */}
               <div className="mt-10 bg-gradient-to-br from-[#55b9b5] to-[#258b91] rounded-[30px] p-8 sm:p-10 text-white shadow-[0_15px_40px_rgba(50,150,150,0.2)]">
 
                 <div className="flex items-center gap-4">
@@ -200,47 +258,76 @@ const Contact = () => {
                     </p>
 
                     <p className="text-xl font-bold mt-1">
-                      +91 98765 43210
+                      +91 {phoneNumber}
                     </p>
                   </div>
 
-                  <a
-                    href="tel:+919876543210"
-                    className="w-12 h-12 rounded-full bg-white text-[#369fa3] flex items-center justify-center hover:scale-110 transition-transform"
-                    aria-label="Call support"
-                  >
-                    <Phone size={22} />
-                  </a>
+                  <div className="flex gap-3">
+
+                    {/* CALL BUTTON */}
+                    <a
+                      href={`tel:+91${phoneNumber}`}
+                      aria-label="Call support"
+                      className="w-12 h-12 rounded-full bg-white text-[#369fa3] flex items-center justify-center hover:scale-110 transition-transform"
+                    >
+                      <Phone size={22} />
+                    </a>
+
+                    {/* WHATSAPP BUTTON */}
+                    <a
+                      href={`https://wa.me/${whatsappNumber}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Chat on WhatsApp"
+                      className="w-12 h-12 rounded-full bg-white text-[#369fa3] flex items-center justify-center hover:scale-110 transition-transform"
+                    >
+                      <MessageCircle size={22} />
+                    </a>
+
+                  </div>
 
                 </div>
 
               </div>
 
-              {/* Social Links */}
+
+              {/* SOCIAL LINKS */}
               <div className="mt-10">
 
                 <h3 className="text-lg font-bold text-gray-800">
                   Follow Us
                 </h3>
 
+                <p className="text-sm text-gray-500 mt-2">
+                  Contact us through email or WhatsApp for updates and support.
+                </p>
+
                 <div className="flex gap-4 mt-5">
 
-                  {[FaFacebookF, FaInstagram, FaInstagram].map((Icon, index) => (
-                    <a
-                      key={index}
-                      href="#"
-                      aria-label={`Social media ${index + 1}`}
-                      className="w-12 h-12 rounded-full bg-white border border-[#dff0ef] text-[#369fa3] flex items-center justify-center hover:bg-[#369fa3] hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                    >
-                      <Icon size={21} />
-                    </a>
-                  ))}
+                  <a
+                    href={`https://wa.me/${whatsappNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                    className="w-12 h-12 rounded-full bg-white border border-[#dff0ef] text-[#369fa3] flex items-center justify-center hover:bg-[#369fa3] hover:text-white transition-all duration-300 shadow-sm"
+                  >
+                    <MessageCircle size={21} />
+                  </a>
+
+                  <a
+                    href={`mailto:${emailAddress}`}
+                    aria-label="Email"
+                    className="w-12 h-12 rounded-full bg-white border border-[#dff0ef] text-[#369fa3] flex items-center justify-center hover:bg-[#369fa3] hover:text-white transition-all duration-300 shadow-sm"
+                  >
+                    <Mail size={21} />
+                  </a>
 
                 </div>
 
               </div>
 
             </motion.div>
+
 
             {/* RIGHT CONTACT FORM */}
             <motion.div
@@ -263,16 +350,25 @@ const Contact = () => {
 
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
 
-                {/* Full Name */}
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+              >
+
+                {/* FULL NAME */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+
+                  <label
+                    htmlFor="fullName"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Full Name
                   </label>
 
                   <input
                     type="text"
+                    id="fullName"
                     name="fullName"
                     placeholder="Enter your full name"
                     required
@@ -280,46 +376,67 @@ const Contact = () => {
                     maxLength={50}
                     className="w-full px-5 py-4 rounded-xl bg-[#f8fcfc] border border-[#dff0ef] outline-none focus:border-[#55b9b5] focus:ring-2 focus:ring-[#55b9b5]/20 transition-all"
                   />
+
                 </div>
 
-                {/* Email */}
+
+                {/* EMAIL */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Email Address
                   </label>
 
                   <input
                     type="email"
+                    id="email"
                     name="email"
                     placeholder="Enter your email"
                     required
                     className="w-full px-5 py-4 rounded-xl bg-[#f8fcfc] border border-[#dff0ef] outline-none focus:border-[#55b9b5] focus:ring-2 focus:ring-[#55b9b5]/20 transition-all"
                   />
+
                 </div>
 
-                {/* Subject */}
+
+                {/* SUBJECT */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Subject
                   </label>
 
                   <input
                     type="text"
+                    id="subject"
                     name="subject"
                     placeholder="What is this regarding?"
                     required
                     maxLength={100}
                     className="w-full px-5 py-4 rounded-xl bg-[#f8fcfc] border border-[#dff0ef] outline-none focus:border-[#55b9b5] focus:ring-2 focus:ring-[#55b9b5]/20 transition-all"
                   />
+
                 </div>
 
-                {/* Message */}
+
+                {/* MESSAGE */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-semibold text-gray-700 mb-2"
+                  >
                     Your Message
                   </label>
 
                   <textarea
+                    id="message"
                     name="message"
                     rows="5"
                     placeholder="Write your message here..."
@@ -328,9 +445,11 @@ const Contact = () => {
                     maxLength={2000}
                     className="w-full px-5 py-4 rounded-xl bg-[#f8fcfc] border border-[#dff0ef] outline-none resize-none focus:border-[#55b9b5] focus:ring-2 focus:ring-[#55b9b5]/20 transition-all"
                   />
+
                 </div>
 
-                {/* Submit Button */}
+
+                {/* SUBMIT BUTTON */}
                 <button
                   type="submit"
                   className="w-full flex items-center justify-center gap-3 px-7 py-4 rounded-xl bg-gradient-to-r from-[#55b9b5] to-[#369fa3] text-white font-bold shadow-lg hover:-translate-y-1 hover:shadow-xl active:scale-95 transition-all duration-300"
@@ -344,8 +463,11 @@ const Contact = () => {
             </motion.div>
 
           </div>
+
         </div>
+
       </section>
+
 
       {/* BOTTOM CTA */}
       <section className="px-5 sm:px-8 py-16">
@@ -363,6 +485,7 @@ const Contact = () => {
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-7">
             Let's Connect And
+
             <span className="block text-[#55b9b5] mt-2">
               Make Things Happen.
             </span>
@@ -374,7 +497,7 @@ const Contact = () => {
           </p>
 
           <a
-            href="mailto:support@techsolution.com"
+            href={`mailto:${emailAddress}`}
             className="inline-flex items-center gap-3 mt-8 px-8 py-4 rounded-full bg-gradient-to-r from-[#55b9b5] to-[#369fa3] text-white font-bold shadow-lg hover:-translate-y-1 transition-all duration-300"
           >
             Email Us
@@ -390,4 +513,3 @@ const Contact = () => {
 };
 
 export default Contact;
- 
