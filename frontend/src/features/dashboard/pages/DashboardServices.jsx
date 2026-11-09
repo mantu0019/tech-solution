@@ -1,58 +1,43 @@
+ 
 import React, { useEffect, useState } from "react";
-
 import {
-  Bike,
-  Utensils,
-  Vote,
-  Sprout,
-  HardHat,
-  Download,
-  HeartPulse,
-  ReceiptText,
-  Users,
-  FolderDown,
-  MapPin,
-  Landmark,
-  ShieldCheck,
-  Fingerprint,
   ChevronLeft,
   ChevronRight,
-  CreditCard,
-  IdCard,
 } from "lucide-react";
+import useAuth from "../../auth/hooks/useAuth";
 
+ 
 const DashboardServices = () => {
-
   const [currentSlide, setCurrentSlide] = useState(0);
-
+   
+ const {isLoading,authData} =  useAuth()
   const slides = [
     [
-      { name: "Aadhaar Services", icon: Fingerprint },
-      { name: "Pincode Search", icon: MapPin },
-      { name: "Voter Services", icon: Vote },
-      { name: "Bank IFSC", icon: Landmark },
-      { name: "Verification", icon: ShieldCheck },
-      { name: "PAN Card", icon: CreditCard },
+      { name: "Aadhaar Services", image: "/images/adhar.jpg" },
+      { name: "Pincode Search", image: "/images/adhar.jpg" },
+      { name: "Voter Services", image: "/images/vote.jpg" },
+      { name: "Bank IFSC", image: "/images/gst.jpg" },
+      { name: "Verification", image: "/images/adhar.jpg" },
+      { name: "PAN Card", image: "/images/pan.png" },
     ],
     [
-      { name: "PAN Services", icon: IdCard },
-      { name: "Ration Services", icon: Utensils },
-      { name: "Vehicle Services", icon: Bike },
-      { name: "GST Services", icon: ReceiptText },
-      { name: "Farmer Services", icon: Sprout },
-      { name: "Download", icon: Download },
+      { name: "PAN Services", image: "/images/pan.png" },
+      { name: "Ration Services", image: "/images/rasan-seva.jpg" },
+      { name: "Vehicle Services", image: "/images/bikes.jpg" },
+      { name: "GST Services", image: "/images/gst.jpg" },
+      { name: "Farmer Services", image: "/images/farmer.jpg" },
+      { name: "Download", image: "/images/rasan-seva.jpg" },
     ],
     [
-      { name: "E-Shram", icon: HardHat },
-      { name: "ABHA Card", icon: HeartPulse },
-      { name: "Family ID", icon: Users },
-      { name: "Documents", icon: FolderDown },
-      { name: "Aadhaar Verify", icon: ShieldCheck },
-      { name: "Banking", icon: Landmark },
+      { name: "E-Shram", image: "/images/e sharm.jpg" },
+      { name: "ABHA Card", image: "/images/adhar.jpg" },
+      { name: "Family ID", image: "/images/vote.jpg" },
+      { name: "Documents", image: "/images/pan.png" },
+      { name: "Aadhaar Verify", image: "/images/adhar.jpg" },
+      { name: "Banking", image: "/images/gst.jpg" },
     ],
   ];
 
-  // Auto Carousel
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -66,22 +51,24 @@ const DashboardServices = () => {
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + slides.length) % slides.length
+    );
   };
 
   const services = [
-    { name: "Aadhaar Services", icon: Fingerprint },
-    { name: "Pan Card Services", icon: CreditCard },
-    { name: "Vehicle Services", icon: Bike },
-    { name: "Ration Services", icon: Utensils },
-    { name: "Voter Services", icon: Vote },
-    { name: "Farmer Services", icon: Sprout },
-    { name: "Eshram Services", icon: HardHat },
-    { name: "Samgra Download", icon: Download },
-    { name: "Abha Card image", icon: HeartPulse },
-    { name: "GST Services", icon: ReceiptText },
-    { name: "Family & More", icon: Users },
-    { name: "Other Services", icon: FolderDown },
+    { name: "Aadhaar Services", image: "/images/adhar.jpg" },
+    { name: "Pan Card Services", image: "/images/pan.png" },
+    { name: "Vehicle Services", image: "/images/bikes.jpg" },
+    { name: "Ration Services", image: "/images/rasan-seva.jpg" },
+    { name: "Voter Services", image: "/images/vote.jpg" },
+    { name: "Farmer Services", image: "/images/farmer.jpg" },
+    { name: "Eshram Services", image: "/images/e sharm.jpg" },
+    { name: "Samgra Download", image: "/images/rasan-seva.jpg" },
+    { name: "Abha Card image", image: "/images/adhar.jpg" },
+    { name: "GST Services", image: "/images/gst.jpg" },
+    { name: "Family & More", image: "/images/vote.jpg" },
+    { name: "Other Services", image: "/images/pan.png" },
   ];
 
   return (
@@ -89,7 +76,7 @@ const DashboardServices = () => {
 
       {/* Greeting */}
       <h2 className="mb-4 text-base sm:text-lg font-semibold text-gray-800">
-        Hi, Welcome Back
+        Hi,  {authData.userData.fullName}
       </h2>
 
       {/* Carousel */}
@@ -102,30 +89,26 @@ const DashboardServices = () => {
             key={currentSlide}
             className="grid w-full grid-cols-3 gap-y-5 gap-x-2 px-8 sm:px-10 py-6 sm:grid-cols-6"
           >
-            {slides[currentSlide].map((item, index) => {
-              const Icon = item.icon;
+            {slides[currentSlide].map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center justify-center gap-2 text-center text-white min-w-0"
+              >
 
-              return (
-                <div
-                  key={index}
-                  className="flex flex-col items-center justify-center gap-2 text-center text-white min-w-0"
-                >
-
-                  <div className="flex h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 shrink-0 items-center justify-center rounded-full bg-white/15">
-                    <Icon
-                      size={28}
-                      strokeWidth={1.7}
-                      className="sm:w-9 sm:h-9"
-                    />
-                  </div>
-
-                  <span className="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight">
-                    {item.name}
-                  </span>
-
+                <div className="h-20 w-20 sm:h-16 sm:w-16 lg:h-20 lg:w-20 shrink-0 overflow-hidden rounded bg-white">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
-              );
-            })}
+
+                <span className="text-[10px] sm:text-xs lg:text-sm font-medium leading-tight">
+                  {item.name}
+                </span>
+
+              </div>
+            ))}
           </div>
 
           {/* Previous */}
@@ -150,7 +133,6 @@ const DashboardServices = () => {
 
         {/* Dots */}
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-
           {slides.map((_, index) => (
             <button
               key={index}
@@ -163,7 +145,6 @@ const DashboardServices = () => {
               }`}
             />
           ))}
-
         </div>
 
       </section>
@@ -171,37 +152,32 @@ const DashboardServices = () => {
       {/* Services Grid */}
       <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 sm:gap-4">
 
-        {services.map((service, index) => {
-          const Icon = service.icon;
+        {services.map((service, index) => (
+          <div
+            key={index}
+            className="group flex min-h-[135px] sm:min-h-[155px] flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-2 sm:px-3 py-4 transition-colors duration-200 hover:border-[#55b9b5] cursor-pointer"
+          >
 
-          return (
-            <div
-              key={index}
-              className="group flex min-h-[135px] sm:min-h-[155px] flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-2 sm:px-3 py-4 transition-colors duration-200 hover:border-[#55b9b5]"
-            >
-
-              {/* Icon */}
-              <div className="flex h-12 w-12 sm:h-16 sm:w-16 items-center justify-center text-[#369fa3]">
-
-                <Icon
-                  size={36}
-                  strokeWidth={1.5}
-                  className="sm:w-11 sm:h-11"
-                />
-
-              </div>
-
-              {/* Divider */}
-              <div className="my-3 w-full border-t border-gray-200" />
-
-              {/* Title */}
-              <h3 className="text-center text-xs sm:text-sm font-medium text-gray-700 leading-snug">
-                {service.name}
-              </h3>
-
+            {/* Service Image */}
+            <div className="flex h-29 w-29 sm:h-20 sm:w-20 items-center justify-center overflow-hidden rounded ">
+              <img
+                src={service.image}
+                alt={service.name}
+                loading="lazy"
+                className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
-          );
-        })}
+
+            {/* Divider */}
+            <div className="my-3 w-full border-t border-gray-200" />
+
+            {/* Title */}
+            <h3 className="text-center text-xs sm:text-sm font-medium text-gray-700 leading-snug">
+              {service.name}
+            </h3>
+
+          </div>
+        ))}
 
       </section>
 
@@ -210,3 +186,4 @@ const DashboardServices = () => {
 };
 
 export default DashboardServices;
+ 

@@ -1,89 +1,100 @@
 import mongoose from "mongoose";
+import userModel from "../models/user.model.js";
 import AppError from "../utils/appError.js";
 import asyncHandler from "../utils/asyncHandler.js";
-import userModel from "../models/user.model.js";
-import serviceRequestModel from "../models/serviceRequest.model.js";
-import walletTransactionModel from "../models/walletTransaction.model.js";
+import serviceRequestModel from "../models/serviceRequest.model.js"
+import walletTransactionModel from "../models/walletTransaction.model";
+const FEE_CHARGED = 6000;
 
-export const submitServiceController = asyncHandler(async (req, res) => {
-  const { servicName, customerName, inputData } = req.body;
 
-  if (!servicName || !inputData) {
-    throw new AppError("Service details are required", 400);
-  }
+export const submitServiceController = asyncHandler(async(req,res)=>{
+ const {applicationNumber,dob,password,state} = req.body;
 
-  const feeCharged = 6000;
+if(!applicationNumber||!dob||!password||!state){
 
-  const session = await mongoose.startSession();
+throw new AppError("All field are required",401);
 
-  let serviceRequest;
 
-  try {
-    await session.withTransaction(async () => {
-      const user = await userModel.findOneAndUpdate(
-        {
-          _id: req.user._id,
-          walletBalance: { $gte: feeCharged },
-        },
-        {
-          $inc: {
-            walletBalance: -feeCharged,
-          },
-        },
-        {
-          new: true,
-          session,
-        },
-      );
+}
 
-      if (!user) {
-        throw new AppError("insufficient wallet balance", 400);
-      }
+const user = await userModel.findById(req.user._id);
 
-      const balanceAfter = user.walletBalance;
-      const balanceBefore = balanceAfter + feeCharged;
+if(!user){
+  throw new AppError("User not found",401)
+};
 
-      const [newServiceRequest] = await serviceRequestModel.create(
-        [
-          {
-            user: req.user._id,
-            serviceName,
-            customerName,
-            inputData,
-            feeCharged,
-            status: "submitted",
-          },
-        ],
-        { session },
-      );
 
-      await walletTransactionModel.create(
-        [
-          {
-            user: req.user._id,
-            type: "debit",
-            amount: feeCharged,
-            balanceBefore,
-            balanceAfter,
-            referenceType: "serviceRequest",
-            referenceId: newServiceRequest._id,
-            description: `service charge for ${servicName}`,
-          },
-        ],
-        { session },
-      );
+const session  = await mongoose.startSession();
 
-      serviceRequest = newServiceRequest;
-    });
-    res.status(201).json({
-      success: true,
-      message: "Service submitted successfully",
-      data: {
-        serviceRequest,
-        feeCharged,
+let serviceRequest;
+let walletBalance;
+
+
+try {
+  await session.withTransaction(async()=>{
+     
+    const user = await userModel.findByIdAndUpdate(
+      {_id:req?.user?._id, walletBalance:{$gte:FEE_CHARGED}},
+      {$inc:{walletBalance:-FEE_CHARGED}},
+      {new:true,session}
+    );
+
+    if(!user){
+      throw new AppError("Insufficient wallet balance",400)
+    };
+
+    const balanceAfter = user.walletBalance;
+    const balanceBefore = balanceAfter+FEE_CHARGED;
+
+    const [newServicesRequest] = await  serviceRequestModel.create(
+      [{user:req.user._id,applicationNumber,dob,password,state,feeCharged,status:"submitted"},
+
+      ],
+      {session}
+    );
+
+
+    await walletTransactionModel.create([
+      { user:req?.user?._id,
+        type:"debit",
+        amount:FEE_CHARGED,
+        balanceBefore,
+        balanceAfter,
+        referenceType:"serviceRequest",
+        referenceId:newServicesRequest._id,
+        description:`Service charge for application ${applicationNumber.trim()}`
       },
-    });
-  } finally {
-    await session.endSession();
-  }
-});
+
+    ],{session
+    })
+
+
+serviceRequest = newServicesRequest;
+
+res.status(201).json({
+  success:true,
+  message:"service submitted successfully",
+  data:serviceRequest
+})
+
+  })
+  
+} finally {
+  await session.endSession();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+})

@@ -11,19 +11,10 @@ import razorpay from "../config/razorpay.config.js";
 import { creditWallet } from "../services/wallet.services.js";
 
 export const verifyPaymentController = asyncHandler(async (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+    req.body;
 
- 
-  const {
-    razorpay_order_id,
-    razorpay_payment_id,
-    razorpay_signature,
-  } = req.body;
-
-  if (
-    !razorpay_order_id ||
-    !razorpay_payment_id ||
-    !razorpay_signature
-  ) {
+  if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
     throw new AppError("Payment details are required", 400);
   }
 
@@ -69,9 +60,7 @@ export const verifyPaymentController = asyncHandler(async (req, res) => {
 
   // 6. Fetch actual payment details from Razorpay
 
-  const razorpayPayment = await razorpay.payments.fetch(
-    razorpay_payment_id
-  );
+  const razorpayPayment = await razorpay.payments.fetch(razorpay_payment_id);
 
   if (
     razorpayPayment.order_id !== razorpay_order_id ||
@@ -96,5 +85,4 @@ export const verifyPaymentController = asyncHandler(async (req, res) => {
     message: "Payment verified and wallet credited successfully",
     data: result,
   });
-
 });
