@@ -1,10 +1,12 @@
  
 import React, { useEffect, useState } from "react";
+
 import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import useAuth from "../../auth/hooks/useAuth";
+import { Link } from "react-router";
 
  
 const DashboardServices = () => {
@@ -56,20 +58,20 @@ const DashboardServices = () => {
     );
   };
 
-  const services = [
-    { name: "Aadhaar Services", image: "/images/adhar.jpg" },
-    { name: "Pan Card Services", image: "/images/pan.png" },
-    { name: "Vehicle Services", image: "/images/bikes.jpg" },
-    { name: "Ration Services", image: "/images/rasan-seva.jpg" },
-    { name: "Voter Services", image: "/images/vote.jpg" },
-    { name: "Farmer Services", image: "/images/farmer.jpg" },
-    { name: "Eshram Services", image: "/images/e sharm.jpg" },
-    { name: "Samgra Download", image: "/images/rasan-seva.jpg" },
-    { name: "Abha Card image", image: "/images/adhar.jpg" },
-    { name: "GST Services", image: "/images/gst.jpg" },
-    { name: "Family & More", image: "/images/vote.jpg" },
-    { name: "Other Services", image: "/images/pan.png" },
-  ];
+ const services = [
+  { name: "Aadhaar Services", slug: "aadhaar", image: "/images/adhar.jpg" },
+  { name: "Pan Card Services", slug: "pan-card", image: "/images/pan.png" },
+  { name: "Vehicle Services", slug: "vehicle", image: "/images/bikes.jpg" },
+  { name: "Ration Services", slug: "ration", image: "/images/rasan-seva.jpg" },
+  { name: "Voter Services", slug: "voter", image: "/images/vote.jpg" },
+  { name: "Farmer Services", slug: "farmer", image: "/images/farmer.jpg" },
+  { name: "Eshram Services", slug: "eshram", image: "/images/e sharm.jpg" },
+  { name: "Samgra Download", slug: "samagra", image: "/images/rasan-seva.jpg" },
+  { name: "Abha Card image", slug: "abha", image: "/images/adhar.jpg" },
+  { name: "GST Services", slug: "gst", image: "/images/gst.jpg" },
+  { name: "Family & More", slug: "family", image: "/images/vote.jpg" },
+  { name: "Other Services", slug: "other", image: "/images/pan.png" },
+];
 
   return (
     <div className="w-full min-w-0">
@@ -152,34 +154,36 @@ const DashboardServices = () => {
       {/* Services Grid */}
       <section className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-3 sm:gap-4">
 
-        {services.map((service, index) => (
-          <div
-            key={index}
-            className="group flex min-h-[135px] sm:min-h-[155px] flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-2 sm:px-3 py-4 transition-colors duration-200 hover:border-[#55b9b5] cursor-pointer"
-          >
+  {services.map((service, index) => (
 
-            {/* Service Image */}
-            <div className="flex h-29 w-29 sm:h-20 sm:w-20 items-center justify-center overflow-hidden rounded ">
-              <img
-                src={service.image}
-                alt={service.name}
-                loading="lazy"
-                className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
-              />
-            </div>
+    <Link
+      key={index}
+      to={`/dashboard/${service.slug}`}
+      className="group flex min-h-[135px] sm:min-h-[155px] flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-2 sm:px-3 py-4 transition-colors duration-200 hover:border-[#55b9b5] cursor-pointer"
+    >
 
-            {/* Divider */}
-            <div className="my-3 w-full border-t border-gray-200" />
+      <div className="flex h-29 w-29 sm:h-20 sm:w-20 items-center justify-center overflow-hidden rounded">
 
-            {/* Title */}
-            <h3 className="text-center text-xs sm:text-sm font-medium text-gray-700 leading-snug">
-              {service.name}
-            </h3>
+        <img
+          src={service.image}
+          alt={service.name}
+          loading="lazy"
+          className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-110"
+        />
 
-          </div>
-        ))}
+      </div>
 
-      </section>
+      <div className="my-3 w-full border-t border-gray-200" />
+
+      <h3 className="text-center text-xs sm:text-sm font-medium text-gray-700 leading-snug">
+        {service.name}
+      </h3>
+
+    </Link>
+
+  ))}
+
+</section>
 
     </div>
   );

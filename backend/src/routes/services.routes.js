@@ -1,9 +1,9 @@
 import { Router } from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
-import { submitServiceController } from "../controllers/submitServiceController.js";
+import { llServiceRequestController,   } from "../controllers/submitServiceController.js";
 
 const serviceRouter = Router();
 
-serviceRouter.post("/submit", authMiddleware, submitServiceController);
+serviceRouter.post("/ll-request", authMiddleware,llServiceRequestController);
 
 export default serviceRouter;

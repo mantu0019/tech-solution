@@ -1,10 +1,8 @@
- 
 import { createBrowserRouter } from "react-router";
 
 import PublicRoutes from "../components/PublicRoutes";
 import PrivateRoutes from "../components/PrivateRoutes";
 
- 
 import Login from "../features/auth/pages/Login";
 import Register from "../features/auth/pages/Register";
 import VerifyEmail from "../features/auth/pages/VerifyEmail";
@@ -13,7 +11,6 @@ import VerifyResetOtp from "../features/auth/pages/VerifyResetOtp";
 import ResetPassword from "../features/auth/pages/ResetPassword";
 import UserProfile from "../features/auth/pages/UserProfile";
 
- 
 import Nav from "../features/home/Nav";
 import HeroSection from "../features/home/HeroSection";
 import About from "../features/home/About";
@@ -21,12 +18,12 @@ import Services from "../features/home/Services";
 import Contact from "../features/home/Contact";
 import Home from "../features/home/home";
 
- 
- import Wallet from "../features/dashboard/pages/wallet/ui/Wallet";
+import Wallet from "../features/dashboard/pages/wallet/ui/Wallet";
 import Dashboards from "../features/dashboard/pages/Dashboards";
+import LLRequest from "../features/dashboard/pages/LLRequest";
+import VehicleServices from "../features/dashboard/pages/VehicleServices";
 
 const AppRoutes = createBrowserRouter([
- 
   {
     path: "/",
     element: <Nav />,
@@ -103,6 +100,16 @@ const AppRoutes = createBrowserRouter([
       {
         path: "wallet",
         element: <Wallet />,
+      },
+
+      {
+        path: "vehicle",
+        element: <VehicleServices />,
+      },
+
+      {
+        path: "vehicle/ll-request",
+        element: <LLRequest />,
       },
     ],
   },
