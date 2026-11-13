@@ -1,12 +1,17 @@
+ 
 // import mongoose from "mongoose";
 
 // export const INDIAN_STATES = [
-//   "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat",
-//   "Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh",
-//   "Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab",
-//   "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh",
-//   "Uttarakhand","West Bengal","Delhi","Jammu and Kashmir","Ladakh","Chandigarh",
-//   "Puducherry","Andaman and Nicobar Islands","Dadra and Nagar Haveli and Daman and Diu",
+//   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
+//   "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
+//   "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh",
+//   "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
+//   "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
+//   "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
+//   "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh",
+//   "Chandigarh", "Puducherry",
+//   "Andaman and Nicobar Islands",
+//   "Dadra and Nagar Haveli and Daman and Diu",
 //   "Lakshadweep",
 // ];
 
@@ -17,44 +22,117 @@
 //       ref: "users",
 //       required: true,
 //     },
-//     customerName: { type: String, trim: true },
 
-//     // User se li jaane wali 4 cheezein
-//     applicationNumber: { type: String, trim: true, required: true },
-//     dob: { type: Date, required: true },
-//     password: { type: String, required: true }, // encrypted store hoga
-//     state: { type: String, enum: INDIAN_STATES, required: true },
+//     customerName: {
+//       type: String,
+//       trim: true,
+//     },
 
-//     feeCharged: { type: Number, required: true, default: 60 }, // rupees
+//     // User Input Fields
+//     applicationNumber: {
+//       type: String,
+//       trim: true,
+//       required: true,
+//     },
 
+//     dob: {
+//       type: Date,
+//       required: true,
+//     },
+
+//     password: {
+//       type: String,
+//       required: true,
+//     },
+
+//     state: {
+//       type: String,
+//       enum: INDIAN_STATES,
+//       required: true,
+//     },
+
+//     // Service Fee (Paise)
+//     feeCharged: {
+//       type: Number,
+//       required: true,
+//       default: 6000,
+//     },
+
+//     // Admin Approval Status
 //     status: {
 //       type: String,
-//       enum: ["submitted", "processing", "completed", "failed"],
-//       default: "submitted",
+//       enum: ["pending", "rejected", "success"],
+//       default: "pending",
+//     },
+
+//     // Admin Response
+//     adminMessage: {
+//       type: String,
+//       trim: true,
+//       default: "",
+//     },
+
+//     reviewedBy: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "users",
+//       default: null,
+//     },
+
+//     reviewedAt: {
+//       type: Date,
+//       default: null,
 //     },
 //   },
-//   { timestamps: true }
+//   {
+//     timestamps: true,
+//   }
 // );
 
-// const serviceRequestModel = mongoose.model("serviceRequest", serviceRequestSchema);
+// const serviceRequestModel = mongoose.model(
+//   "serviceRequest",
+//   serviceRequestSchema
+// );
+
 // export default serviceRequestModel;
 
-
-
- 
 
 
 import mongoose from "mongoose";
 
 export const INDIAN_STATES = [
-  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
-  "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
-  "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh",
-  "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-  "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
-  "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
-  "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh",
-  "Chandigarh", "Puducherry",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+  "Delhi",
+  "Jammu and Kashmir",
+  "Ladakh",
+  "Chandigarh",
+  "Puducherry",
   "Andaman and Nicobar Islands",
   "Dadra and Nagar Haveli and Daman and Diu",
   "Lakshadweep",
@@ -62,6 +140,7 @@ export const INDIAN_STATES = [
 
 const serviceRequestSchema = new mongoose.Schema(
   {
+    // User Information
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -73,7 +152,14 @@ const serviceRequestSchema = new mongoose.Schema(
       trim: true,
     },
 
-    // User Input Fields
+    // Service Information
+    serviceType: {
+      type: String,
+      required: true,
+      default: "LL",
+    },
+
+    // Application Details
     applicationNumber: {
       type: String,
       trim: true,
@@ -85,9 +171,11 @@ const serviceRequestSchema = new mongoose.Schema(
       required: true,
     },
 
-    password: {
+    // Encrypted Password
+    passwordEncrypted: {
       type: String,
       required: true,
+      select: false,
     },
 
     state: {
@@ -103,11 +191,12 @@ const serviceRequestSchema = new mongoose.Schema(
       default: 6000,
     },
 
-    // Admin Approval Status
+    // Application Status
     status: {
       type: String,
       enum: ["pending", "rejected", "success"],
       default: "pending",
+      index: true,
     },
 
     // Admin Response
@@ -127,11 +216,36 @@ const serviceRequestSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+
+    // Soft Delete
+    isDeleted: {
+      type: Boolean,
+      default: false,
+      index: true,
+    },
+
+    deletedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      default: null,
+    },
+
+    deletedAt: {
+      type: Date,
+      default: null,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+// User application history index
+serviceRequestSchema.index({
+  user: 1,
+  createdAt: -1,
+  
+});
 
 const serviceRequestModel = mongoose.model(
   "serviceRequest",

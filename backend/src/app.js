@@ -9,6 +9,7 @@ import errorMiddleware from "./middleware/error.middleware.js";
 import authRouter from "./routes/user.routes.js";
 import walletRouter from "./routes/wallet.routes.js";
 import serviceRouter from "./routes/services.routes.js";
+import adminRouter from "./routes/admin.routes.js";
 
 const app = express();
 
@@ -31,7 +32,8 @@ app.use(morgan("dev"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/wallet", walletRouter);
-app.use("/api/service",serviceRouter)
+app.use("/api/service",serviceRouter);
+app.use("/api/admin",adminRouter);
 
 app.get("/", (req, res) => {
   res.send("working....");

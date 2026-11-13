@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
-import { llServiceRequestController,   } from "../controllers/submitServiceController.js";
+import { llServiceRequestController,   } from "../controllers/submitService.controller.js";
 
 const serviceRouter = Router();
 

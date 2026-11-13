@@ -5,10 +5,12 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
  import AuthInitializer from "./components/AuthInitializer";
 import AppRoutes from "./app/AppRoutes";
+import App from "./App";
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <AuthInitializer>
       <RouterProvider router={AppRoutes} />
     </AuthInitializer>
   </Provider>,
+  <App/>
 );

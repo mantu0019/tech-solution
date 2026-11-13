@@ -45,6 +45,11 @@ if (!process.env.RAZORPAY_WEBHOOK_SECRET) {
   throw new Error("RAZORPAY_WEBHOOK_SECRET is missing from .env");
 }
 
+if(!process.env.ENCRYPTION_KEY){
+    throw new Error("ENCRYPTION_KEY is missing from .env");
+
+}
+
 const envConfig = {
   MONGO_URI: process.env.MONGO_URI,
   PORT: process.env.PORT,
@@ -58,8 +63,8 @@ const envConfig = {
   OTP_EXPIRE_MINUTES:process.env.OTP_EXPIRE_MINUTES,
   RAZORPAY_KEY_ID:process.env.RAZORPAY_KEY_ID,
   RAZORPAY_KEY_SECRET:process.env.RAZORPAY_KEY_SECRET,
-  RAZORPAY_WEBHOOK_SECRET:process.env.RAZORPAY_WEBHOOK_SECRET
-
+  RAZORPAY_WEBHOOK_SECRET:process.env.RAZORPAY_WEBHOOK_SECRET,
+  ENCRYPTION_KEY:process.env.ENCRYPTION_KEY
 };
 
 export default envConfig;
