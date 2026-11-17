@@ -10,6 +10,7 @@ import authRouter from "./routes/user.routes.js";
 import walletRouter from "./routes/wallet.routes.js";
 import serviceRouter from "./routes/services.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import userDashboardRouter from "./routes/userDashboard.routes.js";
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/wallet", walletRouter);
 app.use("/api/service",serviceRouter);
 app.use("/api/admin",adminRouter);
+app.use("/api/user",userDashboardRouter)
 
 app.get("/", (req, res) => {
   res.send("working....");

@@ -4,14 +4,22 @@ import { adminServiceAction } from "../state/adminServiceAction";
 
 export const useAdmin = () => {
   const { isLoading, error, adminServices } = useSelector(
-    (state) => state.adminServicesSlice,
+    (state) => state.adminServicesSlice
   );
 
   const dispatch = useDispatch();
 
-  const adminServicesAllData = useCallback(() => {
-    return dispatch(adminServiceAction()).unwrap();
-  }, [dispatch]);
+  const adminServicesAllData = useCallback(
+    (params = {}) => {
+      return dispatch(adminServiceAction(params)).unwrap();
+    },
+    [dispatch]
+  );
 
-  return { error, isLoading, adminServicesAllData, adminServices };
+  return {
+    error,
+    isLoading,
+    adminServicesAllData,
+    adminServices,
+  };
 };

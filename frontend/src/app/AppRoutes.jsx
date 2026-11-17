@@ -22,6 +22,9 @@ import Wallet from "../features/dashboard/pages/wallet/ui/Wallet";
 import Dashboards from "../features/dashboard/pages/Dashboards";
 import LLRequest from "../features/dashboard/pages/LLRequest";
 import VehicleServices from "../features/dashboard/pages/VehicleServices";
+import AdminServicesAllData from "../features/admin/pages/AdminServicesAllData";
+import AdminAccessOnly from "../components/AdminAccessOnly";
+import UserDashboard from "../features/userDashboard/pages/UserDashbaord";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -101,6 +104,10 @@ const AppRoutes = createBrowserRouter([
         path: "wallet",
         element: <Wallet />,
       },
+      {
+        path: "user-dashboard",
+        element: <UserDashboard />,
+      },
 
       {
         path: "vehicle",
@@ -110,6 +117,12 @@ const AppRoutes = createBrowserRouter([
       {
         path: "vehicle/ll-request",
         element: <LLRequest />,
+      },
+      {
+        element: <AdminAccessOnly />,
+        children: [
+          { path: "admin-dashboard", element: <AdminServicesAllData /> },
+        ],
       },
     ],
   },

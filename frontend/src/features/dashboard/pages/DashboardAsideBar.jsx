@@ -10,8 +10,12 @@ import {
   ShieldCheck,
   ChevronRight,
 } from "lucide-react";
+import useAuth from "../../auth/hooks/useAuth";
 
 const DashboardAsideBar = ({ onLogout }) => {
+ const {authData} = useAuth();
+ const isAdmin  = authData?.userData?.role==="admin" 
+ 
 
   const menuItems = [
     {
@@ -24,9 +28,21 @@ const DashboardAsideBar = ({ onLogout }) => {
       path: "/dashboard/profile",
       icon: UserRound,
     },
+   ...(isAdmin
+      ? [{
+          title: "Admin Dashboard",
+          path: "/dashboard/admin-dashboard",
+          icon: ShieldCheck,
+        }]
+      : []),
     {
       title: "My Wallet",
       path: "/dashboard/wallet",
+      icon: Wallet,
+    },
+    {
+      title: "UserDashboard",
+      path: "/dashboard/user-dashboard",
       icon: Wallet,
     },
   ];

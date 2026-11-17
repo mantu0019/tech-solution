@@ -1,7 +1,7 @@
 import { Router } from "express";
-import authMiddleware from "../middleware/auth.middleware";
-import { getAllServiceRequestController } from "../controllers/adminServiceController";
-import adminMiddleware from "../middleware/admin.middleware";
+import authMiddleware from "../middleware/auth.middleware.js";
+import { getAllServiceRequestController } from "../controllers/adminServiceController.js";
+import adminMiddleware from "../middleware/admin.middleware.js";
 const adminRouter = Router();
 
 adminRouter.get(
@@ -10,5 +10,6 @@ adminRouter.get(
   adminMiddleware,
   getAllServiceRequestController,
 );
+
 
 export default adminRouter;

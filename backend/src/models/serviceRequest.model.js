@@ -1,15 +1,41 @@
  
+
 // import mongoose from "mongoose";
 
 // export const INDIAN_STATES = [
-//   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
-//   "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
-//   "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh",
-//   "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland",
-//   "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu",
-//   "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
-//   "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh",
-//   "Chandigarh", "Puducherry",
+//   "Andhra Pradesh",
+//   "Arunachal Pradesh",
+//   "Assam",
+//   "Bihar",
+//   "Chhattisgarh",
+//   "Goa",
+//   "Gujarat",
+//   "Haryana",
+//   "Himachal Pradesh",
+//   "Jharkhand",
+//   "Karnataka",
+//   "Kerala",
+//   "Madhya Pradesh",
+//   "Maharashtra",
+//   "Manipur",
+//   "Meghalaya",
+//   "Mizoram",
+//   "Nagaland",
+//   "Odisha",
+//   "Punjab",
+//   "Rajasthan",
+//   "Sikkim",
+//   "Tamil Nadu",
+//   "Telangana",
+//   "Tripura",
+//   "Uttar Pradesh",
+//   "Uttarakhand",
+//   "West Bengal",
+//   "Delhi",
+//   "Jammu and Kashmir",
+//   "Ladakh",
+//   "Chandigarh",
+//   "Puducherry",
 //   "Andaman and Nicobar Islands",
 //   "Dadra and Nagar Haveli and Daman and Diu",
 //   "Lakshadweep",
@@ -17,6 +43,7 @@
 
 // const serviceRequestSchema = new mongoose.Schema(
 //   {
+//     // User Information
 //     user: {
 //       type: mongoose.Schema.Types.ObjectId,
 //       ref: "users",
@@ -28,7 +55,14 @@
 //       trim: true,
 //     },
 
-//     // User Input Fields
+//     // Service Information
+//     serviceType: {
+//       type: String,
+//       required: true,
+//       default: "LL",
+//     },
+
+//     // Application Details
 //     applicationNumber: {
 //       type: String,
 //       trim: true,
@@ -40,9 +74,11 @@
 //       required: true,
 //     },
 
-//     password: {
+//     // Encrypted Password
+//     passwordEncrypted: {
 //       type: String,
 //       required: true,
+//       select: false,
 //     },
 
 //     state: {
@@ -58,11 +94,12 @@
 //       default: 6000,
 //     },
 
-//     // Admin Approval Status
+//     // Application Status
 //     status: {
 //       type: String,
 //       enum: ["pending", "rejected", "success"],
 //       default: "pending",
+//       index: true,
 //     },
 
 //     // Admin Response
@@ -82,11 +119,36 @@
 //       type: Date,
 //       default: null,
 //     },
+
+//     // Soft Delete
+//     isDeleted: {
+//       type: Boolean,
+//       default: false,
+//       index: true,
+//     },
+
+//     deletedBy: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       ref: "users",
+//       default: null,
+//     },
+
+//     deletedAt: {
+//       type: Date,
+//       default: null,
+//     },
 //   },
 //   {
 //     timestamps: true,
 //   }
 // );
+
+// // User application history index
+// serviceRequestSchema.index({
+//   user: 1,
+//   createdAt: -1,
+  
+// });
 
 // const serviceRequestModel = mongoose.model(
 //   "serviceRequest",
@@ -94,6 +156,7 @@
 // );
 
 // export default serviceRequestModel;
+
 
 
 
@@ -137,6 +200,35 @@ export const INDIAN_STATES = [
   "Dadra and Nagar Haveli and Daman and Diu",
   "Lakshadweep",
 ];
+
+// Result File Schema
+const resultFileSchema = new mongoose.Schema(
+  {
+    url: {
+      type: String,
+      default: null,
+    },
+
+    publicId: {
+      type: String,
+      default: null,
+    },
+
+    fileType: {
+      type: String,
+      enum: ["image", "pdf", null],
+      default: null,
+    },
+
+    originalName: {
+      type: String,
+      default: null,
+    },
+  },
+  {
+    _id: false,
+  }
+);
 
 const serviceRequestSchema = new mongoose.Schema(
   {
@@ -194,7 +286,7 @@ const serviceRequestSchema = new mongoose.Schema(
     // Application Status
     status: {
       type: String,
-      enum: ["pending", "rejected", "success"],
+      enum: ["pending", "rejected", "completed"],
       default: "pending",
       index: true,
     },
@@ -206,6 +298,13 @@ const serviceRequestSchema = new mongoose.Schema(
       default: "",
     },
 
+    // Admin Uploaded Result
+    resultFile: {
+      type: resultFileSchema,
+      default: () => ({}),
+    },
+
+    // Admin Information
     reviewedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -240,11 +339,10 @@ const serviceRequestSchema = new mongoose.Schema(
   }
 );
 
-// User application history index
+// User Application History Index
 serviceRequestSchema.index({
   user: 1,
   createdAt: -1,
-  
 });
 
 const serviceRequestModel = mongoose.model(

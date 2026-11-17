@@ -3,11 +3,13 @@ import authReducer from '../features/auth/state/authSlice';
 import wallet from "../features/dashboard/pages/wallet/state/walletSlice";
 import services from "../features/dashboard/state/serviceState";
 import adminServicesSlice from '../features/admin/state/adminServiceState';
+import userDashboardSlice from "../features/userDashboard/state/userState"
 export const store = configureStore({
   reducer: {
     auth:authReducer,
     wallet:wallet,
     services:services,
-    adminServicesSlice:adminServicesSlice
+    adminServicesSlice:adminServicesSlice,
+    userDashboard:userDashboardSlice
   },
 });
