@@ -49,6 +49,14 @@ if(!process.env.ENCRYPTION_KEY){
     throw new Error("ENCRYPTION_KEY is missing from .env");
 
 }
+if(!process.env.IMAGE_KIT_PRIVATE_KEY){
+    throw new Error("IMAGE_KIT_PRIVATE_KEY is missing from .env");
+
+}
+if(!process.env.IMAGEKIT_URL_ENDPOINT){
+    throw new Error("IMAGEKIT_URL_ENDPOINT is missing from .env");
+
+}
 
 const envConfig = {
   MONGO_URI: process.env.MONGO_URI,
@@ -64,7 +72,9 @@ const envConfig = {
   RAZORPAY_KEY_ID:process.env.RAZORPAY_KEY_ID,
   RAZORPAY_KEY_SECRET:process.env.RAZORPAY_KEY_SECRET,
   RAZORPAY_WEBHOOK_SECRET:process.env.RAZORPAY_WEBHOOK_SECRET,
-  ENCRYPTION_KEY:process.env.ENCRYPTION_KEY
+  ENCRYPTION_KEY:process.env.ENCRYPTION_KEY,
+  IMAGE_KIT_PRIVATE_KEY:process.env.IMAGE_KIT_PRIVATE_KEY,
+  IMAGEKIT_URL_ENDPOINT:process.env.IMAGEKIT_URL_ENDPOINT
 };
 
 export default envConfig;

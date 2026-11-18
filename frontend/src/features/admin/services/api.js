@@ -19,3 +19,26 @@ export const adminServices = async ({
 
   return res.data;
 };
+
+export const updateServices = async ({
+  adminMessage,
+  status,
+  requestId,
+  resultFile,
+}) => {
+  const formData = new FormData();
+
+  formData.append("status", status);
+  formData.append("adminMessage", adminMessage || "");
+
+  if (resultFile) {
+    formData.append("resultFile", resultFile);
+  }
+
+  const res = await apiInstance.patch(
+    `/api/admin/services/${requestId}`,
+    formData
+  );
+
+  return res.data;
+};

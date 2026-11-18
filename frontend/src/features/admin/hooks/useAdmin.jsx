@@ -1,14 +1,21 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { adminServiceAction } from "../state/adminServiceAction";
+import {
+  adminServiceAction,
+  updateServicesAction,
+} from "../state/adminServiceAction";
 
 export const useAdmin = () => {
-  const { isLoading, error, adminServices } = useSelector(
-    (state) => state.adminServicesSlice
-  );
+  const {
+    isLoading,
+    error,
+    adminServices,
+    isUpdating,
+  } = useSelector((state) => state.adminServicesSlice);
 
   const dispatch = useDispatch();
 
+  // Get all services
   const adminServicesAllData = useCallback(
     (params = {}) => {
       return dispatch(adminServiceAction(params)).unwrap();
@@ -16,10 +23,20 @@ export const useAdmin = () => {
     [dispatch]
   );
 
+  // Update service
+  const updateServicesByAdmin = useCallback(
+    (data) => {
+      return dispatch(updateServicesAction(data)).unwrap();
+    },
+    [dispatch]
+  );
+
   return {
     error,
     isLoading,
-    adminServicesAllData,
+    isUpdating,
     adminServices,
+    adminServicesAllData,
+    updateServicesByAdmin,
   };
 };
