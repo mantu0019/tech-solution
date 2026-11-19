@@ -1,19 +1,22 @@
  
 import React, { useEffect, useState } from "react";
-
+import { Wallet, Plus } from "lucide-react";
 import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import useAuth from "../../auth/hooks/useAuth";
 import { Link } from "react-router";
+import { useWallet } from "./wallet/hook/useWallet";
 
  
 const DashboardServices = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
    
  const {isLoading,authData} =  useAuth()
-  const slides = [
+ const {walletBalance}  =  useWallet()
+ 
+ const slides = [
     [
       { name: "Aadhaar Services", image: "/images/adhar.jpg" },
       { name: "Pincode Search", image: "/images/adhar.jpg" },
@@ -75,12 +78,43 @@ const DashboardServices = () => {
 
   return (
     <div className="w-full min-w-0">
-
+          
       {/* Greeting */}
       <h2 className="mb-4 text-base sm:text-lg font-semibold text-gray-800">
         Hi,  {authData.userData.fullName}
       </h2>
+ 
+ 
+<div className="flex items-center justify-between rounded-xl border border-[#d5eeee] bg-white px-4 py-3 shadow-sm">
 
+  <div className="flex items-center gap-3">
+    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#e5f5f4] text-[#319fa1]">
+      <Wallet size={21} />
+    </div>
+
+    <div>
+      <p className="text-xs font-medium text-gray-500">
+        My Wallet Balance
+      </p>
+
+      <h1 className="text-xl font-bold text-gray-800">
+        ₹{(walletBalance / 100).toLocaleString("en-IN")}
+      </h1>
+    </div>
+  </div>
+
+  <Link
+    to="/dashboard/wallet"
+    className="flex items-center gap-1.5 rounded-lg bg-[#319fa1] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#278889]"
+  >
+    <Plus size={15} />
+    Add Money
+  </Link>
+
+</div>
+
+
+  
       {/* Carousel */}
       <section className="relative mb-6 sm:mb-8 overflow-hidden rounded-lg border border-[#d5eeee] bg-white p-1">
 

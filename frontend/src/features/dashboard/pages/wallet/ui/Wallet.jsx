@@ -22,6 +22,7 @@ const Wallet = () => {
     totalWalletBalanceByUser
   } = useWallet();
 
+ 
   // Quick Amount
   const quickAmounts = [100, 200, 500, 1000, 2000];
 
